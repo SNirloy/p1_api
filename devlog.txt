@@ -1,26 +1,9 @@
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-USAGE:
-* Replace all fields, angle brackets included, with specified info.
-  eg, pd <pd#> --> pd 3
-* Delete these instructions once all teammates understand usage.
-  (from tilde bar above to tilde bar below)
-* rename this file devlog.txt
-
-devlog--
-Use keyboard shortcut to jump to end,
- replicate entry template, (Ctrl-Shift up x5, Ctrl-X, Ctrl-V x2)
- modify appropriately.
-Each entry should begin with the following format:
- firstL -- TIMESTAMP\n
-e.g.: 
-clydeS -- 2999-12-31 23:59
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-<Team Name (minus "team")>
-<Member Bubbles>
-<Member Buttercup>
-<Member Blossom>
-pd <pd#>
+Cold Embers
+Sadi Nirloy (PM)
+Emily Ortiz
+Gabriel Thompson
+Thomas Zhang
+pd 7
 ---------------------
 <Project Title/Description>
 
@@ -42,7 +25,6 @@ created repo
 added .gitignore
 ==============================================================
 
-
 emilyO -- 2022-12-04  20:38
 --------------------------------------------------------------
 added devlog.txt
@@ -51,4 +33,14 @@ added devlog.txt
 emilyO -- 2022-12-04  20:49
 --------------------------------------------------------------
 added flag.jpg
+==============================================================
+
+sadiN -- 2022-12-04  20:55
+--------------------------------------------------------------
+updated readme heading
+==============================================================
+
+emilyO -- 2022-12-04  21:02
+--------------------------------------------------------------
+updated devlog and devlog heading
 ==============================================================
