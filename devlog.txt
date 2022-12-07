@@ -25,16 +25,6 @@ created repo
 added .gitignore
 ==============================================================
 
-emilyO -- 2022-12-04  20:38
---------------------------------------------------------------
-added devlog.txt
-==============================================================
-
-emilyO -- 2022-12-04  20:49
---------------------------------------------------------------
-added flag.jpg
-==============================================================
-
 sadiN -- 2022-12-04  20:55
 --------------------------------------------------------------
 updated readme heading
@@ -42,5 +32,18 @@ updated readme heading
 
 emilyO -- 2022-12-04  21:02
 --------------------------------------------------------------
+added devlog.txt
+--------------------------------------------------------------
+added flag.jpg
+--------------------------------------------------------------
 updated devlog and devlog heading
+==============================================================
+
+gabrielT, emilyO, thomasZ, sadiN -- 2022-12-06 21:55
+--------------------------------------------------------------
+Updated design doc. We did not receive feedback b/c we did not
+bring printed copies. However, we did go through our own work
+with a harder eye, making sure our language was specific. With
+a better understanding of our APIs, we made revisions to the 
+database structure, as well.
 ==============================================================
