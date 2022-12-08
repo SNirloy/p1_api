@@ -47,3 +47,22 @@ with a harder eye, making sure our language was specific. With
 a better understanding of our APIs, we made revisions to the 
 database structure, as well.
 ==============================================================
+
+thomasZ -- 2022-12-07 12:43
+--------------------------------------------------------------
+Created basic working app
+==============================================================
+
+emilyO -- 2022-12-07 12:43
+--------------------------------------------------------------
+Updated readme with summary and launch codes
+==============================================================
+
+thomasZ -- 2022-12-07 9:15
+--------------------------------------------------------------
+Added requirements.txt
+==============================================================
+
+emilyO -- 2022-12-08 9:20
+--------------------------------------------------------------
+Created API card for Airport Info API
