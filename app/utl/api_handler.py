@@ -1,31 +1,58 @@
 import requests
 
-# returns latitude and longitude of inputted airport in an array
-# airport_code is 3 or 4 letters and valid code
-# any bad input is dealt with __init__.py
-def airport_api(airport_code):
+# takes in a 3 or 4 letter string
+# returns boolean representing if the airport code is valid
+# __input__.py ensures airport_code is 3 or 4 letters
+def valid_airport_code(airport_code):
     url = "https://airport-info.p.rapidapi.com/airport"
 
     querystring = {}
-
-    if len(airport_code) == 4: # 4 letter ICAO code
-        querystring["icao"] = airport_code
-        print("ICAO code added to querystring")
-    else: # 3 letter IATA code
-        querystring["iata"] = airport_code
-        print("IATA code added to querystring")
-
-    print("querystring: " + str(querystring))
-
     headers = {
         "X-RapidAPI-Key": "57757685bemsh76f30b0ffcfea52p1f8aacjsna219a89367bf",
         "X-RapidAPI-Host": "airport-info.p.rapidapi.com"
     }
 
+    if len(airport_code) == 4: # 4 letter ICAO code
+        querystring["icao"] = airport_code
+        # print("ICAO code added to querystring")
+    else: # 3 letter IATA code
+        querystring["iata"] = airport_code
+        # print("IATA code added to querystring")
+
+    # print("querystring: " + str(querystring))
+
     # response is a dict of what the API returns
     response = requests.get(url, headers=headers, params=querystring).json()
+    # print(response)
 
-    print(response)
+    # True if error is not a key in response
+    # False if error is a key in response
+    return "error" not in response.keys()
+
+
+# takes in valid 4 letter ICAO or 3 letter IATA
+# returns latitude and longitude in an array
+def airport_api(airport_code):
+    url = "https://airport-info.p.rapidapi.com/airport"
+
+    querystring = {}
+    headers = {
+        "X-RapidAPI-Key": "57757685bemsh76f30b0ffcfea52p1f8aacjsna219a89367bf",
+        "X-RapidAPI-Host": "airport-info.p.rapidapi.com"
+    }
+
+    if len(airport_code) == 4: # 4 letter ICAO code
+        querystring["icao"] = airport_code
+        # print("ICAO code added to querystring")
+    else: # 3 letter IATA code
+        querystring["iata"] = airport_code
+        # print("IATA code added to querystring")
+
+    # print("querystring: " + str(querystring))
+
+    # response is a dict of what the API returns
+    response = requests.get(url, headers=headers, params=querystring).json()
+    # print(response)
 
     output = [response["latitude"], response["longitude"]]
     return(output)
@@ -43,7 +70,13 @@ def airport_api(airport_code):
 #     img_explanation = web["explanation"]
 #     return render_template("main.html", title=img_title, explanation=img_explanation, url=img_url)
 
-
-
-print(airport_api("LAX"))
+print("==================== valid_airport_code test ====================")
+print("should be False, False, True, True")
+print(valid_airport_code("AAAA")) # False ICAO
+print(valid_airport_code("LKS")) # False IATA
+print(valid_airport_code("KJFK")) # True ICAO
+print(valid_airport_code("JFK")) # True IATA
+print("==================== airport_api test ====================")
+print("both should be [33.94159, -118.40853]")
 print(airport_api("KLAX"))
+print(airport_api("LAX"))
