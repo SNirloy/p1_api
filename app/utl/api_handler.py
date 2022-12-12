@@ -57,6 +57,27 @@ def airport_api(airport_code):
     output = [response["latitude"], response["longitude"]]
     return(output)
 
+# takes in array of numbers [latitude, longitude]
+# returns businesses and restaurants within a 5 mile radius of the location
+def yelp_api(location):
+    latitude = location[0]
+    longitude = location[1]
+
+    url = f"https://api.yelp.com/v3/businesses/search?latitude={latitude}&longitude={longitude}&term=restaurant&sort_by=best_match&limit=20"
+
+    url = "https://api.yelp.com/v3/businesses/search?latitude=40.643523&longitude=-73.782195&term=restaurant&sort_by=best_match&limit=20"
+
+    key = "FqL1tUfXhjMmcun656ogjOtnWRNhlIy2GM_0XWBlV_rrUQtLuzO3CCPtie1yHgPrTcMLycM6CK00Yh_ZW4CxMIG92rffQsPKUuNmAZ60t0OkNCHwPboTruQ7Pa-WY3Yx"
+
+    headers = {
+        "accept": "application/json",
+        "Authorization": "Bearer " + key
+    }
+
+    response = requests.get(url, headers=headers)
+
+    print(response.text)
+
 
 # key = open("key_nasa.txt", "r").read() #key is string
 # key = key.strip() #removing white space
@@ -70,13 +91,14 @@ def airport_api(airport_code):
 #     img_explanation = web["explanation"]
 #     return render_template("main.html", title=img_title, explanation=img_explanation, url=img_url)
 
-print("==================== valid_airport_code test ====================")
-print("should be False, False, True, True")
-print(valid_airport_code("AAAA")) # False ICAO
-print(valid_airport_code("LKS")) # False IATA
-print(valid_airport_code("KJFK")) # True ICAO
-print(valid_airport_code("JFK")) # True IATA
-print("==================== airport_api test ====================")
-print("both should be [33.94159, -118.40853]")
-print(airport_api("KLAX"))
-print(airport_api("LAX"))
+# print("==================== valid_airport_code test ====================")
+# print("should be False, False, True, True")
+# print(valid_airport_code("AAAA")) # False ICAO
+# print(valid_airport_code("LKS")) # False IATA
+# print(valid_airport_code("KJFK")) # True ICAO
+# print(valid_airport_code("JFK")) # True IATA
+# print("==================== airport_api test ====================")
+# print("both should be [33.94159, -118.40853]")
+# print(airport_api("KLAX"))
+# print(airport_api("LAX"))
+yelp_api(4)
