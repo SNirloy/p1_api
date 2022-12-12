@@ -1,4 +1,5 @@
 import requests
+import json
 
 # takes in a 3 or 4 letter string
 # returns boolean representing if the airport code is valid
@@ -60,23 +61,34 @@ def airport_api(airport_code):
 # takes in array of numbers [latitude, longitude]
 # returns businesses and restaurants within a 5 mile radius of the location
 def yelp_api(location):
+    # print(location)
     latitude = location[0]
     longitude = location[1]
 
-    url = f"https://api.yelp.com/v3/businesses/search?latitude={latitude}&longitude={longitude}&term=restaurant&sort_by=best_match&limit=20"
+    # 5 miles aprox 8000 meters
+    url = "https://api.yelp.com/v3/businesses/search" +\
+    f"?latitude={latitude}" +\
+    f"&longitude={longitude}" +\
+    "&radius=8000" +\
+    "&term=restaurant" +\
+    "&sort_by=best_match" +\
+    "&limit=2"
 
-    url = "https://api.yelp.com/v3/businesses/search?latitude=40.643523&longitude=-73.782195&term=restaurant&sort_by=best_match&limit=20"
-
-    key = "FqL1tUfXhjMmcun656ogjOtnWRNhlIy2GM_0XWBlV_rrUQtLuzO3CCPtie1yHgPrTcMLycM6CK00Yh_ZW4CxMIG92rffQsPKUuNmAZ60t0OkNCHwPboTruQ7Pa-WY3Yx"
+    key = open("../keys/key_yelp.txt", "r").read()
+    key = key.strip()
+    print(key)
 
     headers = {
         "accept": "application/json",
         "Authorization": "Bearer " + key
     }
 
-    response = requests.get(url, headers=headers)
+    response = requests.get(url, headers=headers).json()
 
-    print(response.text)
+    print(json.dumps(response, indent=2))
+
+    # businesses = requests[B]
+
 
 
 # key = open("key_nasa.txt", "r").read() #key is string
@@ -101,4 +113,5 @@ def yelp_api(location):
 # print("both should be [33.94159, -118.40853]")
 # print(airport_api("KLAX"))
 # print(airport_api("LAX"))
-yelp_api(4)
+coords = airport_api("LAX")
+yelp_api(coords)
