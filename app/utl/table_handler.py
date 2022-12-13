@@ -73,7 +73,38 @@ def password_check(username, password):
 	db.close()
 	return False
 	
+# Adds a business if not in table. Does nothing if it is.
+def add_bsns(bsns_name, bsns_place):
+	db = sqlite3.connect(DB_FILE)
+	c = db.cursor()
 
+	name_tuple = (bsns_name, )
+	c.execute("select * from bsns_rate where business_name = ?;", name_tuple)
+	response = c.fetchone()
+	if (response == None):
+		bsns_tuple = (bsns_name, bsns_place)
+		c.execute("insert into bsns_rate values (?, ?, 0);", bsns_tuple)
+
+	db.commit()
+	db.close()	
+
+
+# Changes the rating of a business based on the given value
+# ADD A BUSINESS BEFORE RATING IT
+def rate_bsns(bsns_name, score_change):
+	db = sqlite3.connect(DB_FILE)
+	c = db.cursor()
+
+	name_tuple = (bsns_name, )
+	c.execute("select * for bsns_rate where business_name = ?;", name_tuple)
+	response = c.fetchone()[0].split(", ")
+	score = int(response[2])
+	score += score_change
+	bsns_tuple = (response[0], response[1], score)
+	c.execute("insert or replace into bsns_rate values (?, ?, ?);", bsns_tuple)
+
+	db.commit()
+	db.close()
 # Testing
 setup()
 
