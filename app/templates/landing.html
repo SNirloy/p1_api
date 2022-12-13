@@ -1,10 +1,120 @@
 <!DOCTYPE html>
-    <head>
-        <title> Homepage </title>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.5/dist/css/foundation.min.css" crossorigin="anonymous">
-    </head>
-    <body>
-        <h1>Stuff</h1>
-    </body>
-</html>
+<html><head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+
+<body>
+
+    <center>
+        <br>
+        <nav class="navbar navbar-light justify-content-between" style="width: 70%;">
+            <a class="navbar-brand logo" href=".">
+                <span style="color: rgb(84, 151, 246);"><b>Layover Calculator</b></span>
+            </a>
+            <form class="form-inline">
+                <button class="btn btn-primary my-2 my-sm-0" type="submit">
+                    <a href="." style="color: rgb(255, 255, 255);">About</a>
+                </button>
+                <li style="color: white;">
+                <button class="btn btn-warning my-2 my-sm-0" type="submit">
+                    <a href="." style="color: rgb(34, 37, 41);">Contact</a>
+                </button>
+            </li></form>
+        </nav>
+        <hr style="width: 70%">
+
+        <br><br>
+
+        <h1 class="title" style="font-weight: 800; color: rgb(100, 100, 100); font-size: 50 px;">Layover Calculator</h1>
+        <br>
+        <h3 class="title" style="font-weight: 800; color: grey;">
+            Find things to do at
+            <span class="wavy animate"></span><span class="typed-cursor" aria-hidden="true"></span>
+        </h3>
+        <br>
+        <p id="hello" style="width: 45vw; font-size: 14px;"><b style="color: rgb(54, 131, 226);">Layover Calculator</b> makes it easy to find things to do during plane layovers! Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+        <br>
+
+        <form>
+          <div class="row" style="width: 50vw;">
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Enter airport code...">
+            </div>
+            <div class="col">
+              <input type="date" class="form-control">
+            </div>
+            <div class="col">
+              <input type="time" class="form-control">
+            </div>
+          </div>
+          <br>
+          <div class="row" style="width: 50vw;">
+            <div class="col">
+            </div>
+            <div class="col">
+              <input type="date" class="form-control">
+            </div>
+            <div class="col">
+              <input type="time" class="form-control">
+            </div>
+          </div>
+        </form>
+
+        <br>
+
+        <button class="btn btn-primary my-2 my-sm-0" type="submit">
+            <a href="." style="color: rgb(255, 255, 255);">Search</a>
+        </button>
+
+        <br><br>
+
+        <button class="btn btn-info my-2 my-sm-0" type="submit">
+            <a href="." style="color: rgb(255, 255, 255);">Sign-up</a>
+        </button>
+
+
+        <button class="btn btn-info my-2 my-sm-0" type="submit">
+            <a href="." style="color: rgb(255, 255, 255);">Log-in</a>
+        </button>
+
+        <br><br><br>
+
+        <p style="font-weight: 400;"><i>Created by <a href="https://github.com/SNirloy/p1_api/" style="text-decoration: none;">Cold Embers</a></i></p>
+        <br>
+        <!--<p style="font-size: 14px;"> <i>If you don't know what district you live in, you can find out <a href="https://www.house.gov/representatives/find-your-representative">here</a>!</i></p>-->
+    </center>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js"></script>
+    <script>
+        var typed = new Typed('.animate', {
+          strings: [
+            'Los Angeles (LAX)', 'Newark (EWR)', 'New York (JFK)', 'Atlanta (ATL)', 'Chicago (OHR)', 'Denver (DEN)', 'Dallas (DFW)', 'Orlando (MCO)', 'London (LHR)', 'Houston (IAH)', 'Las Vegas (LAS)', 'Dubai (DXB)'
+          ],
+          typeSpeed: 90,
+          backSpeed: 50,
+          loop: true,
+          shuffle: true
+        });
+    </script><style type="text/css" data-typed-js-css="true">
+        .typed-cursor{
+          opacity: 1;
+            text-decoration-style: solid;
+        }
+        .typed-cursor.typed-cursor--blink{
+          animation: typedjsBlink 0.7s infinite;
+          -webkit-animation: typedjsBlink 0.7s infinite;
+                  animation: typedjsBlink 0.7s infinite;
+        }
+        @keyframes typedjsBlink{
+          50% { opacity: 0.0; }
+        }
+        @-webkit-keyframes typedjsBlink{
+          0% { opacity: 1; }
+          50% { opacity: 0.0; }
+          100% { opacity: 1; }
+        }
+      </style>
+
+
+
+</body></html>
