@@ -17,3 +17,7 @@ pip install requirements.txt
 cd app
 python __init__.py
 ```
+Copy the resulting link into the URL of the browser of your choice.
+```
+http://127.0.0.1:5000
+```
