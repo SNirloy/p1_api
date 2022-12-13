@@ -79,7 +79,7 @@ def yelp_api(location):
     f"&longitude={longitude}" +\
     "&radius=8000" +\
     "&sort_by=best_match" +\
-    "&limit=5" # +\
+    "&limit=1" # +\
     # "&term=restaurant"
 
     key = open("../keys/key_yelp.txt", "r").read()
@@ -114,7 +114,7 @@ def yelp_api(location):
     return output   
 
 # takes in array of numbers [latitude, longitude]
-def booking_api(location)
+# def booking_api(location)
 
 
 # print("==================== valid_airport_code test ====================")
