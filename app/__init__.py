@@ -18,7 +18,7 @@ table_handler.setup() # setup tables
 @app.route("/", methods = ["POST", "GET"])
 def landing():
     if not 'username' in session:
-        return render_template('login.html')
+        return render_template('landing.html')
     else:
         return render_template('landing.html')
 
@@ -32,6 +32,10 @@ def registration():
     return redirect("/")
 
 @app.route("/login", methods = ['GET', 'POST'])
+def loginpage():
+    return render_template('login.html')
+
+@app.route("/loggingin", methods = ['GET', 'POST'])
 def login():
     if (table_handler.user_check(request.form["username"]) == True):
         if (table_handler.password_check(request.form["username"], request.form["password"]) == True):
