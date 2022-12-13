@@ -59,7 +59,15 @@ def airport_api(airport_code):
     return(output)
 
 # takes in array of numbers [latitude, longitude]
-# returns businesses and restaurants within a 5 mile radius of the location
+# returns array of businesses and restaurants within a 5 mile radius of the location
+# each element in the array is a dictionary for one business containing the following info
+# - name (string)
+# - display_address (array where each element is an address line, each element is a string)
+# - display_phone (string)
+# - url (string)
+# - price (string)
+# - Hours NEED TO DO THIS
+# - rating (float)
 def yelp_api(location):
     # print(location)
     latitude = location[0]
@@ -70,13 +78,13 @@ def yelp_api(location):
     f"?latitude={latitude}" +\
     f"&longitude={longitude}" +\
     "&radius=8000" +\
-    "&term=restaurant" +\
     "&sort_by=best_match" +\
-    "&limit=2"
+    "&limit=5" # +\
+    # "&term=restaurant"
 
     key = open("../keys/key_yelp.txt", "r").read()
     key = key.strip()
-    print(key)
+    # print(key)
 
     headers = {
         "accept": "application/json",
@@ -84,24 +92,30 @@ def yelp_api(location):
     }
 
     response = requests.get(url, headers=headers).json()
+    # print(json.dumps(response, indent=2))
+    # print(response["businesses"])
+    
+    output = []
 
-    print(json.dumps(response, indent=2))
+    businesses = response["businesses"] # array of businesses, each element is a dictionary with one businesses' info
+    num_businesses = len(businesses) # same as limit in url
+    print("number of businesses/restaurants: " + str(num_businesses))
+    
+    for i in range(num_businesses):
+        all_info = businesses[i] # dict for one business
+        output.append({})
+        main_info = output[i] # dict for one business
+        main_info["name"] = all_info["name"]
+        main_info["display_address"] = all_info["location"]["display_address"]
+        main_info["display_phone"] = all_info["display_phone"]
+        main_info["url"] = all_info["url"]
+        main_info["price"] = all_info["price"]
+        main_info["rating"] = all_info["rating"]
+    return output   
 
-    # businesses = requests[B]
+# takes in array of numbers [latitude, longitude]
+def booking_api(location)
 
-
-
-# key = open("key_nasa.txt", "r").read() #key is string
-# key = key.strip() #removing white space
-
-# @app.route("/")
-# def index():
-#     api_url = f"https://api.nasa.gov/planetary/apod?api_key={key}" # url with api key
-#     web = requests.get(api_url).json() #json data of api_url, web is a dictionary
-#     img_url = web["url"] #gets url of img from web dictionary
-#     img_title = web["title"]
-#     img_explanation = web["explanation"]
-#     return render_template("main.html", title=img_title, explanation=img_explanation, url=img_url)
 
 # print("==================== valid_airport_code test ====================")
 # print("should be False, False, True, True")
@@ -113,5 +127,7 @@ def yelp_api(location):
 # print("both should be [33.94159, -118.40853]")
 # print(airport_api("KLAX"))
 # print(airport_api("LAX"))
+print("==================== yelp_api test ====================")
 coords = airport_api("LAX")
-yelp_api(coords)
+results = yelp_api(coords)
+print(json.dumps(results, indent=2))
