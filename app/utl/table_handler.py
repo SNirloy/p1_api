@@ -96,13 +96,14 @@ def rate_bsns(bsns_name, score_change):
 	c = db.cursor()
 
 	name_tuple = (bsns_name, )
-	c.execute("select * for bsns_rate where business_name = ?;", name_tuple)
-	response = c.fetchone()[0].split(", ")
+	c.execute("select * from bsns_rate where business_name = ?;", name_tuple)
+	response = c.fetchone()
+	# print(response)
 	score = int(response[2])
 	score += score_change
 	bsns_tuple = (response[0], response[1], score)
-	c.execute("insert or replace into bsns_rate values (?, ?, ?);", bsns_tuple)
-
+	c.execute("replace into bsns_rate values (?, ?, ?);", bsns_tuple)
+	
 	db.commit()
 	db.close()
 # Testing
@@ -126,3 +127,10 @@ if (password_check("Heebies", "welp")):
 	print("Good positive response")
 else: 
 	print("Bad negative response")
+
+add_bsns("Lucky Charms", "Somewhere Over the Rainbow")
+add_bsns("Joe's Pizza", "Near Gabriel's House")
+
+rate_bsns("Lucky Charms", 1)
+rate_bsns("Lucky Charms", -1)
+rate_bsns("Lucky Charms", -1)
