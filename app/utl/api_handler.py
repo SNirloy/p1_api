@@ -1,5 +1,6 @@
 import requests
 import json
+import os
 
 # takes in a 3 or 4 letter string
 # returns boolean representing if the airport code is valid
@@ -7,9 +8,23 @@ import json
 def valid_airport_code(airport_code):
     url = "https://airport-info.p.rapidapi.com/airport"
 
+    key = open("../keys/key_rapid.txt", "r").read()
+    key = key.strip()
+    # print(key)
+
+    # path = os.path.abspath("keys/key_rapid.txt")
+    # print(path)
+    # os.chdir("keys/")
+    # path = os.path.abspath("key_rapid.txt")
+    # path = os.path.relpath("key_rapid.txt", start="/keys")
+    # print(path)
+    # key = open(path, "r").read()
+    # key = key.strip()
+    # print(key)
+
     querystring = {}
     headers = {
-        "X-RapidAPI-Key": "57757685bemsh76f30b0ffcfea52p1f8aacjsna219a89367bf",
+        "X-RapidAPI-Key": key,
         "X-RapidAPI-Host": "airport-info.p.rapidapi.com"
     }
 
@@ -36,9 +51,13 @@ def valid_airport_code(airport_code):
 def airport_api(airport_code):
     url = "https://airport-info.p.rapidapi.com/airport"
 
+    key = open("../keys/key_rapid.txt", "r").read()
+    key = key.strip()
+    # print(key)
+
     querystring = {}
     headers = {
-        "X-RapidAPI-Key": "57757685bemsh76f30b0ffcfea52p1f8aacjsna219a89367bf",
+        "X-RapidAPI-Key": key,
         "X-RapidAPI-Host": "airport-info.p.rapidapi.com"
     }
 
@@ -117,17 +136,17 @@ def yelp_api(location):
 # def booking_api(location)
 
 
-# print("==================== valid_airport_code test ====================")
-# print("should be False, False, True, True")
-# print(valid_airport_code("AAAA")) # False ICAO
-# print(valid_airport_code("LKS")) # False IATA
-# print(valid_airport_code("KJFK")) # True ICAO
-# print(valid_airport_code("JFK")) # True IATA
+print("==================== valid_airport_code test ====================")
+print("should be False, False, True, True")
+print(valid_airport_code("AAAA")) # False ICAO
+print(valid_airport_code("LKS")) # False IATA
+print(valid_airport_code("KJFK")) # True ICAO
+print(valid_airport_code("JFK")) # True IATA
 # print("==================== airport_api test ====================")
 # print("both should be [33.94159, -118.40853]")
 # print(airport_api("KLAX"))
 # print(airport_api("LAX"))
-print("==================== yelp_api test ====================")
-coords = airport_api("LAX")
-results = yelp_api(coords)
-print(json.dumps(results, indent=2))
+# print("==================== yelp_api test ====================")
+# coords = airport_api("LAX")
+# results = yelp_api(coords)
+# print(json.dumps(results, indent=2))
