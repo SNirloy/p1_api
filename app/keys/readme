@@ -1,0 +1,4 @@
+KEYS NEEDED:
+key_yelp.txt
+key_rapid.txt
+  - Airport Info API and Booking API are both accessed through Rapid API, so they use the same key.
