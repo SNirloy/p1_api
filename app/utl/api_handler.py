@@ -8,20 +8,12 @@ import os
 def valid_airport_code(airport_code):
     url = "https://airport-info.p.rapidapi.com/airport"
 
-    key = open("../keys/key_rapid.txt", "r").read()
+    path = os.path.dirname(os.path.realpath(__file__)) # path to current python file
+    print(path)
+    key = open(path + "/../keys/key_rapid.txt", "r").read()
     key = key.strip()
-    # print(key)
-
-    # path = os.path.abspath("keys/key_rapid.txt")
-    # print(path)
-    # os.chdir("keys/")
-    # path = os.path.abspath("key_rapid.txt")
-    # path = os.path.relpath("key_rapid.txt", start="/keys")
-    # print(path)
-    # key = open(path, "r").read()
-    # key = key.strip()
-    # print(key)
-
+    print(key)
+    
     querystring = {}
     headers = {
         "X-RapidAPI-Key": key,
@@ -139,9 +131,9 @@ def yelp_api(location):
 print("==================== valid_airport_code test ====================")
 print("should be False, False, True, True")
 print(valid_airport_code("AAAA")) # False ICAO
-print(valid_airport_code("LKS")) # False IATA
-print(valid_airport_code("KJFK")) # True ICAO
-print(valid_airport_code("JFK")) # True IATA
+# print(valid_airport_code("LKS")) # False IATA
+# print(valid_airport_code("KJFK")) # True ICAO
+# print(valid_airport_code("JFK")) # True IATA
 # print("==================== airport_api test ====================")
 # print("both should be [33.94159, -118.40853]")
 # print(airport_api("KLAX"))

@@ -28,23 +28,25 @@ def register_page():
 
 @app.route("/registrate", methods = ['GET', 'POST'])
 def registration():
-    table_handler.registrate(request.form["createusername"], request.form["createpassword"])
-    return redirect("/")
+    if (table_handler.registrate(request.form["createusername"], request.form["createpassword"]) == False):
+        return render_template('register.html', message = "Username already taken")
+    else:
+        return render_template('register.html', message = "Account created!")
 
 @app.route("/login", methods = ['GET', 'POST'])
 def loginpage():
     return render_template('login.html')
 
-@app.route("/loggingin", methods = ['GET', 'POST'])
+@app.route("/verify", methods = ['GET', 'POST'])
 def login():
     if (table_handler.user_check(request.form["username"]) == True):
         if (table_handler.password_check(request.form["username"], request.form["password"]) == True):
             session['username'] = request.form['username']
             return redirect('/')
         else:
-            return redirect("/")
+            return render_template('login.html' , message = "Invalid username/password")
     else: 
-        return redirect("/")
+        return render_template('login.html', message = "invalid username/password")
 
 if __name__ == "__main__":
     app.debug = True
