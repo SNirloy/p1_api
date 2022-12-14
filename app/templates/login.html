@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <h1> Welcome!</h1>
-        <form action="/loggingin" method="POST">
+        <form action="/verify" method="POST">
             <h2> Login </h2>
-            <label> Username</label>
+            <h3><label> Username:</label></h3>
             <input type="text" name="username" minlength="3" required> <br>
-            <label> Password</label>
+            <h3><label> Password:</label></h3>
             <input type="password" minlength="3" name="password" required>
             <input type="submit" name="login" value="Login">
-        </form>
+        </form> <br>
+        {{message}}
         <h2> Don't have an account?</h2>
         <form action="/register" method="POST">
             <input type="submit" name="registrate" value="Register">
