@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <h1> Register </h1>
     <form action = "/registrate" method = "POST">
-        <label>Username</label>
+        <h3><label> Username:</label></h3>
         <input type="text" name="createusername" minlength="3" required> <br>
-        <label>Password</label>
+        <h3><label> Password:</label></h3>
         <input type="password" minlength="5" name="createpassword" required> <br>
         <input type="submit" name="createpassword" value="Create account">
-    </form>
+    </form> <br> 
+    {{message}}
     <form action="/">
         <input type="submit" value="Back to homepage">
       </form>
