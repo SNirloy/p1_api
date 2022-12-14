@@ -59,7 +59,7 @@ def user_check(username):
 
 #USE ONLY AFTER USER_CHECK: THIS FOO ASSUMES USER IS IN USERS TABLE
 def password_check(username, password):
-	db = sqlite3.connect(DB_FILE);
+	db = sqlite3.connect(DB_FILE)
 	c = db.cursor()
 
 	name_tuple = (username, )
@@ -78,8 +78,8 @@ def add_bsns(bsns_name, bsns_place):
 	db = sqlite3.connect(DB_FILE)
 	c = db.cursor()
 
-	name_tuple = (bsns_name, )
-	c.execute("select * from bsns_rate where business_name = ?;", name_tuple)
+	place_tuple = (bsns_place, )
+	c.execute("select * from bsns_rate where location = ?;", place_tuple)
 	response = c.fetchone()
 	if (response == None):
 		bsns_tuple = (bsns_name, bsns_place)
@@ -95,14 +95,14 @@ def rate_bsns(bsns_name, score_change):
 	db = sqlite3.connect(DB_FILE)
 	c = db.cursor()
 
-	name_tuple = (bsns_name, )
-	c.execute("select * from bsns_rate where business_name = ?;", name_tuple)
+	place_tuple = (bsns_name, )
+	c.execute("select * from bsns_rate where location = ?;", place_tuple)
 	response = c.fetchone()
 	# print(response)
 	score = int(response[2])
 	score += score_change
-	bsns_tuple = (response[0], response[1], score)
-	c.execute("replace into bsns_rate values (?, ?, ?);", bsns_tuple)
+	bsns_tuple = (response[2], score,response[0])
+	c.execute("select net_rating, replace(net_rating, ?, ?) from bsns_rate where business_name = ?;", bsns_tuple)
 	
 	db.commit()
 	db.close()
