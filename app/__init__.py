@@ -48,6 +48,10 @@ def login():
     else: 
         return render_template('login.html', message = "invalid username/password")
 
+@app.route("/view_places")
+def view_places():
+    return render_template('view_places.html')
+
 if __name__ == "__main__":
     app.debug = True
     app.run()

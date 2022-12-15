@@ -14,8 +14,8 @@ def setup():
 	c = db.cursor()
 
 	c.execute("create table if not exists users(username text primary key, password text);")
-	c.execute("create table if not exists bsns_rate(business_name text, location text, net_rating integer);")
-	c.execute("create table if not exists hotels(hotel_name text, location text, close_arprt text);")
+	c.execute("create table if not exists bsns_rate(business_name text, location text primary key, net_rating integer);")
+	c.execute("create table if not exists hotels(hotel_name text, location text primary key, close_arprt text);")
 	
 	db.commit()
 	db.close()
@@ -106,6 +106,37 @@ def rate_bsns(bsns_place, score_change):
 	
 	db.commit()
 	db.close()
+
+# Only use on a business that you are sure is added 
+def get_rate(bsns_place):
+	db = sqlite3.connect(DB_FILE)
+	c = db.cursor()
+
+	place_tuple = (bsns_place, )
+	c.execute("select net_rating from bsns_rate where bsns_place = ?;", place_tuple)
+	response = c.fetchone()
+	if (response != None){
+		return int(response[0])
+	}
+	else{ return -0.5} #Something went wrong
+
+	db.commit()
+	db.close()
+
+def add_hotel(name, coors, arprt):
+	db = sqlite3.connect(DB_FILE)
+	c = db.cursor()
+
+	place_tuple = (coors, )
+	c.execute ("select * from hotels where location = ?;", place_tuple)
+	response = c.fetchone()
+	if( response == None):
+		hotel_tuple = (name, coors, arprt)
+		c.execute("insert into hotels values (?, ?, ?);", hotel_tuple)
+
+	db.commit()
+	db.close()
+
 # Testing
 setup()
 
