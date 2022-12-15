@@ -109,14 +109,19 @@ thomasZ -- 2022-12-12 23:00
 worked on user registration/user login for flask
 ==============================================================
 
+gabrielT -- 2022-12-14 13:00
+--------------------------------------------------------------
+added code for autocomplete airport search box
+==============================================================
+
 thomasZ -- 2022-12-14 13:15
 --------------------------------------------------------------
 error messages for login/registration
 ==============================================================
 
-gabrielT -- 2022-12-14 13:00
+emilyO -- 2022-12-14 13:20
 --------------------------------------------------------------
-added code for autocomplete airport search box
+fixed key accessing, can run api_handler.py from any directory
 ==============================================================
 
 gabrielT -- 2022-12-14 19:00
@@ -124,7 +129,7 @@ gabrielT -- 2022-12-14 19:00
 added the names of thousands of airports into the autocomplete
 ==============================================================
 
-sadiN -- 2022-12-15 2:04
+sadiN -- 2022-12-15 02:04
 --------------------------------------------------------------
 Implemented the methods for adding and rating a business
 ==============================================================
