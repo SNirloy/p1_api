@@ -91,18 +91,18 @@ def add_bsns(bsns_name, bsns_place):
 
 # Changes the rating of a business based on the given value
 # ADD A BUSINESS BEFORE RATING IT
-def rate_bsns(bsns_name, score_change):
+def rate_bsns(bsns_place, score_change):
 	db = sqlite3.connect(DB_FILE)
 	c = db.cursor()
 
-	place_tuple = (bsns_name, )
+	place_tuple = (bsns_place, )
 	c.execute("select * from bsns_rate where location = ?;", place_tuple)
 	response = c.fetchone()
-	# print(response)
+	print(response)
 	score = int(response[2])
 	score += score_change
-	bsns_tuple = (response[2], score,response[0])
-	c.execute("select net_rating, replace(net_rating, ?, ?) from bsns_rate where business_name = ?;", bsns_tuple)
+	bsns_tuple = (score,response[1])
+	c.execute("update bsns_rate set net_rating = ? where location = ?;", bsns_tuple)
 	
 	db.commit()
 	db.close()
@@ -131,6 +131,6 @@ else:
 add_bsns("Lucky Charms", "Somewhere Over the Rainbow")
 add_bsns("Joe's Pizza", "Near Gabriel's House")
 
-rate_bsns("Lucky Charms", 1)
-rate_bsns("Lucky Charms", -1)
-rate_bsns("Lucky Charms", -1)
+rate_bsns("Somewhere Over the Rainbow", 1)
+rate_bsns("Somewhere Over the Rainbow", -1)
+rate_bsns("Somewhere Over the Rainbow", -1)
