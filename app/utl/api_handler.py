@@ -5,37 +5,37 @@ import os
 # takes in a 3 or 4 letter string
 # returns boolean representing if the airport code is valid
 # __input__.py ensures airport_code is 3 or 4 letters
-def valid_airport_code(airport_code):
-    url = "https://airport-info.p.rapidapi.com/airport"
+# def valid_airport_code(airport_code):
+#     url = "https://airport-info.p.rapidapi.com/airport"
 
-    path = os.path.dirname(os.path.realpath(__file__)) # path to current python file
-    print(path)
-    key = open(path + "/../keys/key_rapid.txt", "r").read()
-    key = key.strip()
-    print(key)
+#     path = os.path.dirname(os.path.realpath(__file__)) # path to current python file
+#     print(path)
+#     key = open(path + "/../keys/key_rapid.txt", "r").read()
+#     key = key.strip()
+#     print(key)
     
-    querystring = {}
-    headers = {
-        "X-RapidAPI-Key": key,
-        "X-RapidAPI-Host": "airport-info.p.rapidapi.com"
-    }
+#     querystring = {}
+#     headers = {
+#         "X-RapidAPI-Key": key,
+#         "X-RapidAPI-Host": "airport-info.p.rapidapi.com"
+#     }
 
-    if len(airport_code) == 4: # 4 letter ICAO code
-        querystring["icao"] = airport_code
-        # print("ICAO code added to querystring")
-    else: # 3 letter IATA code
-        querystring["iata"] = airport_code
-        # print("IATA code added to querystring")
+#     if len(airport_code) == 4: # 4 letter ICAO code
+#         querystring["icao"] = airport_code
+#         # print("ICAO code added to querystring")
+#     else: # 3 letter IATA code
+#         querystring["iata"] = airport_code
+#         # print("IATA code added to querystring")
 
-    # print("querystring: " + str(querystring))
+#     # print("querystring: " + str(querystring))
 
-    # response is a dict of what the API returns
-    response = requests.get(url, headers=headers, params=querystring).json()
-    # print(response)
+#     # response is a dict of what the API returns
+#     response = requests.get(url, headers=headers, params=querystring).json()
+#     # print(response)
 
-    # True if error is not a key in response
-    # False if error is a key in response
-    return "error" not in response.keys()
+#     # True if error is not a key in response
+#     # False if error is a key in response
+#     return "error" not in response.keys()
 
 
 # takes in valid 4 letter ICAO or 3 letter IATA
@@ -43,7 +43,9 @@ def valid_airport_code(airport_code):
 def airport_api(airport_code):
     url = "https://airport-info.p.rapidapi.com/airport"
 
-    key = open("../keys/key_rapid.txt", "r").read()
+    path = os.path.dirname(os.path.realpath(__file__)) # path to current python file
+    # print(path)
+    key = open(path + "/../keys/key_rapid.txt", "r").read()
     key = key.strip()
     # print(key)
 
@@ -53,12 +55,14 @@ def airport_api(airport_code):
         "X-RapidAPI-Host": "airport-info.p.rapidapi.com"
     }
 
-    if len(airport_code) == 4: # 4 letter ICAO code
-        querystring["icao"] = airport_code
-        # print("ICAO code added to querystring")
-    else: # 3 letter IATA code
-        querystring["iata"] = airport_code
-        # print("IATA code added to querystring")
+    # if len(airport_code) == 4: # 4 letter ICAO code
+    #     querystring["icao"] = airport_code
+    #     # print("ICAO code added to querystring")
+    # else: # 3 letter IATA code
+    #     querystring["iata"] = airport_code
+    #     # print("IATA code added to querystring")
+
+    querystring["iata"] = airport_code
 
     # print("querystring: " + str(querystring))
 
@@ -93,7 +97,9 @@ def yelp_api(location):
     "&limit=1" # +\
     # "&term=restaurant"
 
-    key = open("../keys/key_yelp.txt", "r").read()
+    path = os.path.dirname(os.path.realpath(__file__)) # path to current python file
+    # print(path)
+    key = open(path + "/../keys/key_yelp.txt", "r").read()
     key = key.strip()
     # print(key)
 
@@ -128,17 +134,19 @@ def yelp_api(location):
 # def booking_api(location)
 
 
-print("==================== valid_airport_code test ====================")
-print("should be False, False, True, True")
-print(valid_airport_code("AAAA")) # False ICAO
+# print("==================== valid_airport_code test ====================")
+# print("should be False, False, True, True")
+# print(valid_airport_code("AAAA")) # False ICAO
 # print(valid_airport_code("LKS")) # False IATA
 # print(valid_airport_code("KJFK")) # True ICAO
 # print(valid_airport_code("JFK")) # True IATA
-# print("==================== airport_api test ====================")
-# print("both should be [33.94159, -118.40853]")
+
+
+print("==================== airport_api test ====================")
+print("should be [33.94159, -118.40853]")
 # print(airport_api("KLAX"))
-# print(airport_api("LAX"))
-# print("==================== yelp_api test ====================")
-# coords = airport_api("LAX")
-# results = yelp_api(coords)
-# print(json.dumps(results, indent=2))
+print(airport_api("LAX"))
+print("==================== yelp_api test ====================")
+coords = airport_api("LAX")
+results = yelp_api(coords)
+print(json.dumps(results, indent=2))
