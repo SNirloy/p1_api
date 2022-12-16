@@ -9,6 +9,7 @@ Time Spent:
 from flask import Flask, session, render_template, request, redirect
 import os
 import utl.table_handler as table_handler
+import utl.api_handler as api_handler
 
 app = Flask(__name__)
 app.secret_key = os.urandom(32)
@@ -50,7 +51,13 @@ def login():
 
 @app.route("/view_places")
 def view_places():
+    c = api_handler.airport_api()
     return render_template('view_places.html')
+
+@app.route("airport")
+def airport():
+    c = api_handler.airport_api(request.form["airport_code"])
+    return render_template('view_places.html', airport_coordinate = c)
 
 if __name__ == "__main__":
     app.debug = True
