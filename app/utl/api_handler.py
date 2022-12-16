@@ -68,7 +68,7 @@ def airport_api(airport_code):
 
     # response is a dict of what the API returns
     response = requests.get(url, headers=headers, params=querystring).json()
-    # print(response)
+    print(response)
 
     output = [response["latitude"], response["longitude"]]
     return(output)
@@ -131,8 +131,32 @@ def yelp_api(location):
     return output   
 
 # takes in array of numbers [latitude, longitude]
-# def booking_api(location)
+def booking_api(location):
+    latitude = location[0]
+    longitude = location[1]
 
+    url = "https://booking-com.p.rapidapi.com/v1/hotels/search-by-coordinates"
+
+    querystring = {"locale":"en-us",\
+    "filter_by_currency":"USD",\
+    "order_by":"popularity",\
+    "adults_number":"2",\
+    "longitude":"-118.40853",\
+    "checkin_date":"2023-05-27",\
+    "latitude":"33.94159",\
+    "room_number":"1",\
+    "units":"metric",\
+    "checkout_date":"2023-05-28",\
+    "search_radius":"1"}
+
+    headers = {
+        "X-RapidAPI-Key": "57757685bemsh76f30b0ffcfea52p1f8aacjsna219a89367bf",
+        "X-RapidAPI-Host": "booking-com.p.rapidapi.com"
+    }
+
+    response = requests.request("GET", url, headers=headers, params=querystring)
+
+    print(response.text)
 
 # print("==================== valid_airport_code test ====================")
 # print("should be False, False, True, True")
@@ -150,3 +174,5 @@ print("==================== yelp_api test ====================")
 coords = airport_api("LAX")
 results = yelp_api(coords)
 print(json.dumps(results, indent=2))
+
+booking_api([1, 2])
