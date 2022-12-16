@@ -115,10 +115,10 @@ def get_rate(bsns_place):
 	place_tuple = (bsns_place, )
 	c.execute("select net_rating from bsns_rate where bsns_place = ?;", place_tuple)
 	response = c.fetchone()
-	if (response != None){
+	if (response != None):
 		return int(response[0])
-	}
-	else{ return -0.5} #Something went wrong
+	else:
+		return -0.5 #Something went wrong
 
 	db.commit()
 	db.close()
@@ -133,6 +133,18 @@ def add_hotel(name, coors, arprt):
 	if( response == None):
 		hotel_tuple = (name, coors, arprt)
 		c.execute("insert into hotels values (?, ?, ?);", hotel_tuple)
+
+	db.commit()
+	db.close()
+
+def get_hotels(arprt):
+	db = sqlite3.connect(DB_FILE)
+	c = db.cursor()
+
+	arprt_tuple = (arprt, )
+	c.execute("select * from hotels where close_arprt = ?;", arprt_tuple)
+	response = c.fetchall()
+	return response
 
 	db.commit()
 	db.close()
