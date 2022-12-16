@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/styles.css">
+    <script src="https://cdn.jsdelivr.net/gh/xcash/bootstrap-autocomplete@master/dist/latest/bootstrap-autocomplete.min.js"></script>
+</head>
+
+<body>
+    <center>
+        <div style="width: 70vw;">
+          <br>
+          <nav class="navbar navbar-light justify-content-between">
+              <a class="navbar-brand logo" href=".">
+                  <span style="color: rgb(84, 151, 246);"><b>Layover Calculator</b></span>
+              </a>
+              <form class="form-inline">
+                  <button class="btn btn-primary my-2 my-sm-0" type="submit">
+                      <a href="." style="color: rgb(255, 255, 255);">About</a>
+                  </button>
+                  <li style="color: white;">
+                  <button class="btn btn-warning my-2 my-sm-0" type="submit">
+                      <a href="." style="color: rgb(34, 37, 41);">Contact</a>
+                  </button>
+              </li></form>
+          </nav>
+          
+          <hr style="width: 70%">
+
+          <br><br>
+
+          {% block content %}
+          {% endblock %}
+        </div>
+    </center>
+
+    {% block scripts %}
+    {% endblock %}
+
+    <style type="text/css" data-typed-js-css="true">
+      {% block css %}
+      {% endblock %}
+    </style>
+
+
+
+</body></html>
