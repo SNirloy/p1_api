@@ -174,3 +174,9 @@ layover date to the same as the starting layover date
 fixed view_places page so that the values from the URL
 arguments are shown in the search box
 ==============================================================
+
+emilyO -- 2022-12-19 14:30
+--------------------------------------------------------------
+finished up api_handler.py and committed changes from today and
+2022-12-18
+==============================================================
