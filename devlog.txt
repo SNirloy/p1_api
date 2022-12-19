@@ -5,7 +5,8 @@ Gabriel Thompson
 Thomas Zhang
 pd 7
 ---------------------
-<Project Title/Description>
+Layover Calculator:
+A website to help you find things to do during flight layovers
 
 
  ______   ______   __   __   __       ______   _______     
@@ -88,6 +89,13 @@ sadiN, thomasZ -- 2022-12-09 13:20
 worked on API cards for notes-and-code repo
 ==============================================================
 
+gabrielT -- 2022-12-10 19:00
+--------------------------------------------------------------
+sketched up design for all webpages on the website, and
+confirmed them with the rest of the team
+decided to switch to bootstrap. it is easier.
+==============================================================
+
 emilyO -- 2022-12-12 00:05
 --------------------------------------------------------------
 started yelp_api() in api_handler.py
@@ -144,7 +152,25 @@ emilyO -- 2022-12-16 13:20
 worked on booking_api() in api_handler.py
 ==============================================================
 
+gabrielT -- 2022-12-18 15:00
+--------------------------------------------------------------
+wrote html for view_places webpage
+created logout button
+
+changed the root route so that it now shows only the landing
+page, and the view_places page is under the /view_places route
+==============================================================
+
 thomasZ -- 2022-12-18 22:47
 --------------------------------------------------------------
 fixed registration/login linking and worked on new route
+==============================================================
+
+gabrielT -- 2022-12-19 11:00
+--------------------------------------------------------------
+added button to landing page so that you can set the ending
+layover date to the same as the starting layover date
+
+fixed view_places page so that the values from the URL
+arguments are shown in the search box
 ==============================================================
