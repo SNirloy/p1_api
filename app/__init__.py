@@ -54,10 +54,10 @@ def view_places():
     c = api_handler.airport_api()
     return render_template('view_places.html')
 
-@app.route("airport")
+@app.route("/airport", methods = ['GET', 'POST'])
 def airport():
-    c = api_handler.airport_api(request.form["airport_code"])
-    return render_template('view_places.html', airport_coordinate = c)
+    c = api_handler.airport_api(request.form["airportCode"])
+    return render_template('view_places.html', airport_coords = c)
 
 if __name__ == "__main__":
     app.debug = True

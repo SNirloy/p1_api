@@ -15,7 +15,7 @@
 <h4><b><i style="font-family: 'Verdana'; color: rgb(100, 100, 100);">Search airport:</i></b></h4>
 <br>
 
-<form>
+<form id = "form1" method = "POST" action = "/airport">
   <div class="row" style="width: 50vw;">
     <div class="col" id="navbar-search-autocomplete">
       <p><u style="text-decoration-style: wavy; text-decoration-color: rgb(152, 185, 198)">Airport:</u></p>
@@ -29,7 +29,7 @@
   </div>
   <div class="row" style="width: 50vw;">
     <div class="col" id="navbar-search-autocomplete">
-      <input type="text" class="form-control" id="myInput" placeholder="Enter airport code...">
+      <input type="text" name = "airportCode" class="form-control" id="myInput" placeholder="Enter airport code...">
     </div>
     <div class="col">
       <input type="date" class="form-control">
@@ -53,8 +53,8 @@
 
 <br>
 
-<button class="btn btn-primary my-2 my-sm-0" type="submit">
-    <a href="." style="color: rgb(255, 255, 255);">Search</a>
+<button form = "form1" class="btn btn-primary my-2 my-sm-0" type="submit">
+    Search
 </button>
 
 <br><br>
