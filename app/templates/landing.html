@@ -1,76 +1,107 @@
 {% extends "base.html" %}
 
+{% block width %}60{% endblock %}
+
+{% block extra_button %}
+  {% if logged_in %}
+  <li style="color: white;">
+  <button class="btn btn-secondary my-2 my-sm-0" type="submit">
+      <a href="." style="color: rgb(255, 255, 255);">Logged in as <b>{{ username }}</b></a>
+  </button>
+  {% endif %}
+{% endblock %}
+
 {% block content %}
-<h1 class="title" style="font-weight: 800; color: rgb(100, 100, 100); font-size: 50 px;">Layover Calculator</h1>
-<br>
-<h3 class="title" style="font-weight: 800; color: grey; font-family: 'Verdana';">
-    Find things to do at
-    <u style="text-decoration-style: wavy; text-decoration-color: rgb(152, 185, 198)">
-      <span class="wavy animate" style="font-family: 'Verdana';"></span><span class="typed-cursor" aria-hidden="true"></span>
-    </u>
-</h3>
-<br>
-<p id="hello" style="width: 45vw; font-size: 14px;"><b style="color: rgb(54, 131, 226);">Layover Calculator</b> makes it easy to find things to do during plane layovers! Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-<br>
-<h4><b><i style="font-family: 'Verdana'; color: rgb(100, 100, 100);">Search airport:</i></b></h4>
-<br>
-
-<form id = "form1" method = "POST" action = "/airport">
-  <div class="row" style="width: 50vw;">
-    <div class="col" id="navbar-search-autocomplete">
-      <p><u style="text-decoration-style: wavy; text-decoration-color: rgb(152, 185, 198)">Airport:</u></p>
-    </div>
-    <div class="col">
-      <p><u style="text-decoration-style: wavy; text-decoration-color: rgb(152, 185, 198)">Start of Layover:</u></p>
-    </div>
-    <div class="col">
-      <p><u style="text-decoration-style: wavy; text-decoration-color: rgb(152, 185, 198)">End of Layover:</u></p>
-    </div>
-  </div>
-  <div class="row" style="width: 50vw;">
-    <div class="col" id="navbar-search-autocomplete">
-      <input type="text" name = "airportCode" class="form-control" id="myInput" placeholder="Enter airport code...">
-    </div>
-    <div class="col">
-      <input type="date" class="form-control">
-    </div>
-    <div class="col">
-      <input type="date" class="form-control">
-    </div>
-  </div>
-  <br>
-  <div class="row" style="width: 50vw;">
-    <div class="col">
-    </div>
-    <div class="col">
-      <input type="time" class="form-control">
-    </div>
-    <div class="col">
-      <input type="time" class="form-control">
-    </div>
-  </div>
-</form>
-
-<br>
-
-<button form = "form1" class="btn btn-primary my-2 my-sm-0" type="submit">
-    Search
-</button>
-
 <br><br>
+<center>
+  <h1 class="title" style="font-weight: 800; color: rgb(100, 100, 100); font-size: 50 px;">Layover Calculator</h1>
+  <br>
+  <h3 class="title" style="font-weight: 800; color: grey; font-family: 'Verdana';">
+      Find things to do at
+      <u style="text-decoration-style: wavy; text-decoration-color: rgb(152, 185, 198)">
+        <span class="wavy animate" style="font-family: 'Verdana';"></span><span class="typed-cursor" aria-hidden="true"></span>
+      </u>
+  </h3>
+  <br>
+  <p id="hello" style="width: 50vw; font-size: 14px;"><b style="color: rgb(54, 131, 226);">Layover Calculator</b> makes it easy to find things to do during plane layovers! Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+  <br>
+  <h4><b><i style="font-family: 'Verdana'; color: rgb(100, 100, 100);">Search airport:</i></b></h4>
+  <br>
 
-<button class="btn btn-info my-2 my-sm-0" type="submit">
-    <a href="http://127.0.0.1:5000/register" style="color: rgb(255, 255, 255);">Sign-up</a>
-</button>
+  <form action="/view_places" method="GET">
+    <div class="row" style="width: 50vw;">
+      <div class="col" id="navbar-search-autocomplete">
+        <p><u style="text-decoration-style: wavy; text-decoration-color: rgb(152, 185, 198)">Airport:</u></p>
+      </div>
+      <div class="col">
+        <p><u style="text-decoration-style: wavy; text-decoration-color: rgb(152, 185, 198)">Start of Layover:</u></p>
+      </div>
+      <div class="col">
+        <p><u style="text-decoration-style: wavy; text-decoration-color: rgb(152, 185, 198)">End of Layover:</u></p>
+      </div>
+    </div>
+    <div class="row" style="width: 50vw;">
+      <div class="col" id="navbar-search-autocomplete">
+        <input type="text" name="airport" class="form-control" id="myInput" placeholder="Enter airport code...">
+      </div>
+      <div class="col">
+        <input type="date" id="date1" name="date1" class="form-control">
+      </div>
+      <div class="col">
+        <input type="date" id="date2" name="date2" class="form-control">
+      </div>
+    </div>
+    <br>
+    <div class="row" style="width: 50vw; height: 3em;">
+      <div class="col">
+      </div>
+      <div class="col">
+        <input type="time" id="time1" name="time1" class="form-control">
+      </div>
+      <div class="col">
+        <input type="time" id="time2" name="time2" class="form-control">
+      </div>
+    </div>
+    <div class="row" style="width: 50vw;">
+      <div class="col"></div>
+      <div class="col"></div>
+      <div class="col">
+        <button class="btn btn-secondary" type="button" style="height: 4vh; width: 7vw; padding: 0; padding-bottom: 23px;"
+          onclick='document.getElementById("date2").value = document.getElementById("date1").value;'>
+            <span style="color: white; font-size: 12px;">Set same date</span>
+        </button>
+      </div>
+    </div>
 
-<button class="btn btn-info my-2 my-sm-0" type="submit">
-    <a href="http://127.0.0.1:5000/login" style="color: rgb(255, 255, 255);">Log-in</a>
-</button>
+    <br>
 
-<br><br><br>
+    <button class="btn btn-primary my-2 my-sm-0" type="submit">
+        <span style="color: rgb(255, 255, 255);">Search</span>
+    </button>
 
-<p style="font-weight: 400;"><i>Created by <a href="https://github.com/SNirloy/p1_api/" style="text-decoration: none;">Cold Embers</a></i></p>
-<br>
+  </form>
+
+  <br><br>
+
+  {% if not logged_in %}
+  <button class="btn btn-info my-2 my-sm-0" type="submit">
+      <a href="http://127.0.0.1:5000/register" style="color: rgb(255, 255, 255);">Sign-up</a>
+  </button>
+
+  <button class="btn btn-info my-2 my-sm-0" type="submit">
+      <a href="http://127.0.0.1:5000/login" style="color: rgb(255, 255, 255);">Log-in</a>
+  </button>
+  {% else %}
+  <button class="btn btn-info my-2 my-sm-0" type="submit">
+      <a href="http://127.0.0.1:5000/login" style="color: rgb(255, 255, 255);">Log out</a>
+  </button>
+  {% endif %}
+
+  <br><br><br>
+
+  <p style="font-weight: 400;"><i>Created by <a href="https://github.com/SNirloy/p1_api/" style="text-decoration: none;">Cold Embers</a></i></p>
+  <br>
+</center>
 {% endblock %}
 
 {% block scripts %}
