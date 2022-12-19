@@ -135,28 +135,49 @@ def booking_api(location):
     latitude = location[0]
     longitude = location[1]
 
+    path = os.path.dirname(os.path.realpath(__file__)) # path to current python file
+    key = open(path + "/../keys/key_rapid.txt", "r").read()
+    key = key.strip()
+
     url = "https://booking-com.p.rapidapi.com/v1/hotels/search-by-coordinates"
 
-    querystring = {"locale":"en-us",\
+    querystring = {"locale":"en-gb",\
     "filter_by_currency":"USD",\
     "order_by":"popularity",\
-    "adults_number":"2",\
-    "longitude":"-118.40853",\
-    "checkin_date":"2023-05-27",\
-    "latitude":"33.94159",\
+    "latitude":latitude,\
+    "longitude":longitude,\
+    "checkin_date":"2022-12-19",\
+    "checkout_date":"2022-12-20",\
     "room_number":"1",\
-    "units":"metric",\
-    "checkout_date":"2023-05-28",\
-    "search_radius":"1"}
+    "adults_number":"2",\
+    "units":"metric"}
 
     headers = {
-        "X-RapidAPI-Key": "57757685bemsh76f30b0ffcfea52p1f8aacjsna219a89367bf",
+        "X-RapidAPI-Key": key,
         "X-RapidAPI-Host": "booking-com.p.rapidapi.com"
     }
 
-    response = requests.request("GET", url, headers=headers, params=querystring)
+    response = requests.request("GET", url, headers=headers, params=querystring).json()
 
-    print(response.text)
+    hotels = response["result"] # array of hotels
+    print(len(hotels))
+    print(json.dumps(hotels[0], indent=2))
+    print(hotels[0]["hotel_name"])
+    print(hotels[0]["address"])
+
+    output = []
+    for i in range(5):
+        hotel = hotels[i]
+        temp = {}
+        temp["hotel_name"] = hotel["hotel_name"]
+        temp["address"] = hotel["address"]
+        temp["min_total_price"] = hotel["min_total_price"]
+        temp["latitude"] = hotel["latitude"]
+        temp["longitude"] = hotel["longitude"]
+        output.append(temp)
+
+    # print(json.dumps(output, indent=2))
+    return output
 
 # print("==================== valid_airport_code test ====================")
 # print("should be False, False, True, True")
@@ -166,13 +187,14 @@ def booking_api(location):
 # print(valid_airport_code("JFK")) # True IATA
 
 
-print("==================== airport_api test ====================")
-print("should be [33.94159, -118.40853]")
-# print(airport_api("KLAX"))
-print(airport_api("LAX"))
-print("==================== yelp_api test ====================")
-coords = airport_api("LAX")
-results = yelp_api(coords)
-print(json.dumps(results, indent=2))
+# print("==================== airport_api test ====================")
+# print("should be [33.94159, -118.40853]")
+# # print(airport_api("KLAX"))
+# print(airport_api("LAX"))
+# print("==================== yelp_api test ====================")
+# coords = airport_api("LAX")
+# results = yelp_api(coords)
+# print(json.dumps(results, indent=2))
 
-booking_api([1, 2])
+results = booking_api([33.94159, -118.40853])
+print(json.dumps(results, indent=2))
