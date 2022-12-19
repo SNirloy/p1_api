@@ -58,10 +58,11 @@ def view_places():
     airport_name = request.args['airport']
     airport_code = airport_name[-4:-1]
     print('Airport: ' + airport_code)
-    c = api_handler.airport_api(airport)
+    coords = api_handler.airport_api(airport_code) 
     print('we got the api')
 
-    yelp_results = yelp_api(airport)
+
+    yelp_results = api_handler.yelp_api(coords)
     print('we got the yelp')
 
     return render_template('view_places.html')

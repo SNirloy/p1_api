@@ -2,42 +2,6 @@ import requests
 import json
 import os
 
-# takes in a 3 or 4 letter string
-# returns boolean representing if the airport code is valid
-# __input__.py ensures airport_code is 3 or 4 letters
-# def valid_airport_code(airport_code):
-#     url = "https://airport-info.p.rapidapi.com/airport"
-
-#     path = os.path.dirname(os.path.realpath(__file__)) # path to current python file
-#     print(path)
-#     key = open(path + "/../keys/key_rapid.txt", "r").read()
-#     key = key.strip()
-#     print(key)
-    
-#     querystring = {}
-#     headers = {
-#         "X-RapidAPI-Key": key,
-#         "X-RapidAPI-Host": "airport-info.p.rapidapi.com"
-#     }
-
-#     if len(airport_code) == 4: # 4 letter ICAO code
-#         querystring["icao"] = airport_code
-#         # print("ICAO code added to querystring")
-#     else: # 3 letter IATA code
-#         querystring["iata"] = airport_code
-#         # print("IATA code added to querystring")
-
-#     # print("querystring: " + str(querystring))
-
-#     # response is a dict of what the API returns
-#     response = requests.get(url, headers=headers, params=querystring).json()
-#     # print(response)
-
-#     # True if error is not a key in response
-#     # False if error is a key in response
-#     return "error" not in response.keys()
-
-
 # takes in valid 4 letter ICAO or 3 letter IATA
 # returns latitude and longitude in an array
 def airport_api(airport_code):
@@ -94,7 +58,7 @@ def yelp_api(location):
     f"&longitude={longitude}" +\
     "&radius=8000" +\
     "&sort_by=best_match" +\
-    "&limit=1" # +\
+    "&limit=5" # +\
     # "&term=restaurant"
 
     path = os.path.dirname(os.path.realpath(__file__)) # path to current python file
@@ -124,16 +88,20 @@ def yelp_api(location):
         main_info = output[i] # dict for one business
         main_info["name"] = all_info["name"]
         main_info["display_address"] = all_info["location"]["display_address"]
-        main_info["display_phone"] = all_info["display_phone"]
+        # main_info["display_phone"] = all_info["display_phone"]
         main_info["url"] = all_info["url"]
         main_info["price"] = all_info["price"]
         main_info["rating"] = all_info["rating"]
+        # distance
+        # desc
     return output   
 
-# takes in array of numbers [latitude, longitude]
-def booking_api(location):
+# takes in array of data [latitude, longitude, start, end]
+def booking_api(input):
     latitude = location[0]
     longitude = location[1]
+    start = location[2]
+    end = location[3]
 
     path = os.path.dirname(os.path.realpath(__file__)) # path to current python file
     key = open(path + "/../keys/key_rapid.txt", "r").read()
@@ -146,8 +114,8 @@ def booking_api(location):
     "order_by":"popularity",\
     "latitude":latitude,\
     "longitude":longitude,\
-    "checkin_date":"2022-12-19",\
-    "checkout_date":"2022-12-20",\
+    "checkin_date":start,\
+    "checkout_date":end,\
     "room_number":"1",\
     "adults_number":"2",\
     "units":"metric"}
@@ -160,10 +128,10 @@ def booking_api(location):
     response = requests.request("GET", url, headers=headers, params=querystring).json()
 
     hotels = response["result"] # array of hotels
-    print(len(hotels))
+    # print(len(hotels))
     print(json.dumps(hotels[0], indent=2))
-    print(hotels[0]["hotel_name"])
-    print(hotels[0]["address"])
+    # print(hotels[0]["hotel_name"])
+    # print(hotels[0]["address"])
 
     output = []
     for i in range(5):
@@ -179,22 +147,13 @@ def booking_api(location):
     # print(json.dumps(output, indent=2))
     return output
 
-# print("==================== valid_airport_code test ====================")
-# print("should be False, False, True, True")
-# print(valid_airport_code("AAAA")) # False ICAO
-# print(valid_airport_code("LKS")) # False IATA
-# print(valid_airport_code("KJFK")) # True ICAO
-# print(valid_airport_code("JFK")) # True IATA
-
-
 # print("==================== airport_api test ====================")
 # print("should be [33.94159, -118.40853]")
 # # print(airport_api("KLAX"))
 # print(airport_api("LAX"))
 # print("==================== yelp_api test ====================")
-# coords = airport_api("LAX")
-# results = yelp_api(coords)
-# print(json.dumps(results, indent=2))
-
-results = booking_api([33.94159, -118.40853])
+coords = airport_api("LAX")
+results = yelp_api(coords)
+print(json.dumps(results, indent=2))
+results = booking_api(coords)
 print(json.dumps(results, indent=2))
