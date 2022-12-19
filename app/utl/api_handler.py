@@ -147,6 +147,14 @@ def booking_api(input):
     # print(json.dumps(output, indent=2))
     return output
 
+# print("==================== valid_airport_code test ====================")
+# print("should be False, False, True, True")
+# print(valid_airport_code("AAAA")) # False ICAO
+# print(valid_airport_code("LKS")) # False IATA
+# print(valid_airport_code("KJFK")) # True ICAO
+# print(valid_airport_code("JFK")) # True IATA
+
+
 # print("==================== airport_api test ====================")
 # print("should be [33.94159, -118.40853]")
 # # print(airport_api("KLAX"))
