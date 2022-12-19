@@ -3,7 +3,7 @@
 ## Roster w/ Roles: 
 - Sadi Nirloy (PM, Database)
 - Emily Ortiz (API)
-- Gabriel Thompson (Foundation)
+- Gabriel Thompson (Bootstrap)
 - Thomas Zhang (Flask)
 
 ## Description of Site
