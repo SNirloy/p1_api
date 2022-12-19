@@ -1,14 +1,74 @@
-<!DOCTYPE html>
-<h1> Register </h1>
-    <form action = "/registrate" method = "POST">
-        <h3><label> Username:</label></h3>
-        <input type="text" name="createusername" minlength="3" required> <br>
-        <h3><label> Password:</label></h3>
-        <input type="password" minlength="5" name="createpassword" required> <br>
-        <input type="submit" name="createpassword" value="Create account">
-    </form> <br> 
-    {{message}}
-    <form action="/">
-        <input type="submit" value="Back to homepage">
-      </form>
-</html>
+{% extends "base.html" %}
+
+{% block width %}70{% endblock %}
+
+{% block content %}
+<br><br>
+<section>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    <center>{{ message }}</center>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <br>
+  <div class="container-fluid">
+    <br><br><br>
+    <div class="row">
+      <div class="col-sm-6 px-0 d-none d-sm-block">
+        <center>
+            <img src="https://www.shutterstock.com/image-illustration/empty-airport-terminal-lounge-airplane-260nw-758602234.jpg" alt="Login image" style="object-fit: cover; object-position: 20% 100%;">
+      </center>
+      </div>
+      <div class="col-sm-6 text-black">
+
+        <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
+
+          <form style="width: 23rem;" action="/registrate" method="POST">
+
+            <h3 class="h1 fw-bold mb-0" style="letter-spacing: 1px;">Register</h3>
+            <br><br>
+
+            <div class="form-outline mb-4">
+              <input type="text" id="form2Example18" name="createusername" class="form-control form-control-lg" />
+              <label class="form-label" for="form2Example18">Email address</label>
+            </div>
+
+            <div class="form-outline mb-4">
+              <input type="password" id="form2Example28" name="createpassword" class="form-control form-control-lg" />
+              <label class="form-label" for="form2Example28">Password</label>
+            </div>
+
+            <div class="pt-1 mb-4">
+              <button class="btn btn-info btn-lg btn-block" type="Submit">Register</button>
+            </div>
+            <p>Already have an account? <a href="/login" class="link-info">Log in here</a></p>
+
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block css %}
+.bg-im.bg-image-vertical {
+    position: relative;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: auto 100%;
+}
+
+@media (min-width: 1025px) {
+    .h-custom-2 {
+        height: 100%;
+    }
+}
+{% endblock %}
