@@ -6,7 +6,7 @@ p1: API Project ft. Database
 Time Spent: 
 """
 
-from flask import Flask, session, render_template, request, redirect
+from flask import Flask, session, render_template, request, redirect, flash
 import os
 import utl.table_handler as table_handler
 import utl.api_handler as api_handler
@@ -18,10 +18,13 @@ table_handler.setup() # setup tables
 
 @app.route("/", methods = ["POST", "GET"])
 def landing():
-    if not 'username' in session:
-        return render_template('landing.html')
-    else:
-        return render_template('landing.html')
+    logged_in = ('username' in session)
+    username = ''
+
+    if 'username' in session:
+        username = session['username']
+
+    return render_template('landing.html', logged_in=('username' in session), username=username)
 
 @app.route("/register", methods = ['GET', 'POST'])
 def register_page():
@@ -30,9 +33,10 @@ def register_page():
 @app.route("/registrate", methods = ['GET', 'POST'])
 def registration():
     if (table_handler.registrate(request.form["createusername"], request.form["createpassword"]) == False):
-        return render_template('register.html', message = "Username already taken")
+        flash("That username is already taken", "danger")
+        return render_template('register.html')
     else:
-        return render_template('register.html', message = "Account created!")
+        return render_template('login.html', message = "Account created!")
 
 @app.route("/login", methods = ['GET', 'POST'])
 def loginpage():
@@ -51,13 +55,26 @@ def login():
 
 @app.route("/view_places")
 def view_places():
-    c = api_handler.airport_api()
+    airport_name = request.args['airport']
+    airport_code = airport_name[-4:-1]
+    print('Airport: ' + airport_code)
+    c = api_handler.airport_api(airport)
+    print('we got the api')
+
+    yelp_results = yelp_api(airport)
+    print('we got the yelp')
+
     return render_template('view_places.html')
 
-@app.route("/airport", methods = ['GET', 'POST'])
+@app.route("/airport")
 def airport():
-    c = api_handler.airport_api(request.form["airportCode"])
-    return render_template('view_places.html', airport_coords = c)
+    c = api_handler.airport_api(request.form["airport_code"])
+    return render_template('view_places.html', airport_coordinate = c)
+
+@app.route('/logout')
+def logout():
+    session.pop("username", None)
+    return redirect('/')
 
 if __name__ == "__main__":
     app.debug = True
