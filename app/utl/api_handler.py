@@ -179,6 +179,19 @@ def booking_api(location):
     # print(json.dumps(output, indent=2))
     return output
 
+    # Given an array of latitude and longitude, we create a string of html that will embed the map
+    def map_api(coordinates):
+        return f"""
+    <div>
+        <iframe width="500" height="400" frameborder="0" src="https://www.bing.com/maps/embed?h=400&w=500&cp={coordinates[0]}~{coordinates[1]}&lvl=16&typ=d&sty=r&src=SHELL&FORM=MBEDV8" scrolling="no">
+        </iframe>
+        <div style="white-space: nowrap; text-align: center; width: 500px; padding: 6px 0;">
+            <a id="largeMapLink" target="_blank" href="https://www.bing.com/maps?cp={coordinates[0]}~{coordinates[1]}&amp;sty=r&amp;lvl=16&amp;FORM=MBEDLD">View Larger Map</a> &nbsp; | &nbsp;
+            <a id="dirMapLink" target="_blank" href="https://www.bing.com/maps/directions?cp={coordinates[0]}~{coordinates[1]}&amp;sty=r&amp;lvl=16&amp;rtp=~pos.{coordinates[0]}_{coordinates[1]}____&amp;FORM=MBEDLD">Get Directions</a>
+        </div>
+    </div>
+"""
+
 # print("==================== valid_airport_code test ====================")
 # print("should be False, False, True, True")
 # print(valid_airport_code("AAAA")) # False ICAO
