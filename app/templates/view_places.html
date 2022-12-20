@@ -76,28 +76,28 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-6" style="background-color: rgb(230, 255, 255); border: 2px solid rgb(200, 193, 212); height: 60vh; margin: 0; padding: 0;">
+		<div class="col-6" style="background-color: rgb(230, 255, 255); border: 2px solid rgb(200, 193, 212); height: 60vh; margin: 0; padding: 0; overflow:auto;">
 			<ul class="list-group">
+        {% for place in yelp_results %}
 			  <li class="list-group-item">
 			  	<table>
 			  		<tr><td style="width: 100%">
-			  			<h4><i>Example Store 1</i></h4>
+			  			<h4><i>{{ place['name'] }}</i></h4>
 			  		</td><td style="width: 100%">
-			  			<h5 style="text-align: right;">$25</h5>
+              <h5 style="text-align: right; color:
+              {% if place['price'] == '$' %}green
+              {% elif place['price'] == '$$' %}rgb(247, 195, 68)
+              {% elif place['price'] == '$$$' %}orange
+              {% elif place['price'] == '$$$$' %}red
+              {% endif %}
+
+              ;">{{ place['price'] }}</h5>
+
 			  		</td></tr>
 			  	</table>
 			  	<p>Brief description of the store Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s... <a href="">read more</a></p>
 			  </li>
-			  <li class="list-group-item">
-			  	<table>
-			  		<tr><td style="width: 100%">
-			  			<h4><i>Example Store 2</i></h4>
-			  		</td><td style="width: 100%">
-			  			<h5 style="text-align: right;">$40</h5>
-			  		</td></tr>
-			  	</table>
-			  	<p>Brief description of the store Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s... <a href="">read more</a></p>
-			  </li>
+        {% endfor %}
 			</ul>
 	    </div>
 		<div class="col-6" style="background-color: rgb(229, 226, 235); border: 2px solid rgb(200, 193, 212); margin: 0; padding: 0;">
