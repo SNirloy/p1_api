@@ -69,14 +69,10 @@ def view_places():
 
     return render_template('view_places.html', yelp_results=yelp_results)
 
-@app.route("/airport")
-def airport():
-    c = api_handler.airport_api(request.form["airport_code"])
-    return render_template('view_places.html', airport_coordinate = c)
-
 @app.route('/logout')
 def logout():
     session.pop("username", None)
+    flash("you have been logged out")
     return redirect('/')
 
 if __name__ == "__main__":
