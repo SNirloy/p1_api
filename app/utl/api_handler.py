@@ -203,7 +203,7 @@ def booking_api(input):
         temp = {}
         temp["hotel_name"] = hotel["hotel_name"]
         temp["address"] = hotel["address"]
-        temp["min_total_price"] = round(hotel["min_total_price"], 2)
+        temp["min_total_price"] = int(hotel["min_total_price"])
         temp["latitude"] = hotel["latitude"]
         temp["longitude"] = hotel["longitude"]
         output.append(temp)
@@ -225,21 +225,22 @@ def map_api(coordinates):
 # print("should be [33.94159, -118.40853]")
 # print(airport_api("LAX"))
 
-print("==================== yelp_api test ====================")
-# coords = airport_api("LAX")
-coords = [33.94159, -118.40853] # LAX
-# coords = [53.333610, -2.849722] # Liverpool Airport
-yelp_results = yelp_api(coords)
-# print(yelp_results)
-print(json.dumps(yelp_results, indent=2))
+# print("==================== yelp_api test ====================")
+# # coords = airport_api("LAX")
+# coords = [33.94159, -118.40853] # LAX
+# # coords = [53.333610, -2.849722] # Liverpool Airport
+# yelp_results = yelp_api(coords)
+# # print(yelp_results)
+# print(json.dumps(yelp_results, indent=2))
 
-# print("==================== booking_api test ====================")
+print("==================== booking_api test ====================")
 # coords = airport_api("LAX")
 # data = coords
-# data.append("2022-12-30") # start date
-# data.append("2022-12-31") # end date
-# results = booking_api(data)
-# print(json.dumps(results, indent=2))
+data = [33.94159, -118.40853]
+data.append("2022-12-30") # start date
+data.append("2022-12-31") # end date
+results = booking_api(data)
+print(json.dumps(results, indent=2))
 
 # print("South Pole Test:")
 # data = [90, 45, "2022-12-30", "2022-12-31"]
