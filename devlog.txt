@@ -180,3 +180,12 @@ emilyO -- 2022-12-19 14:30
 finished up api_handler.py and committed changes from today and
 2022-12-18
 ==============================================================
+
+emilyO -- 2022-12-20 00:30
+--------------------------------------------------------------
+haha i was not done with api_handler.py
+
+cleaned up code, added functionality for handling bad API keys
+and other errors, added more clear comments above each method,
+edited what methods returned
+==============================================================
