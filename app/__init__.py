@@ -72,7 +72,6 @@ def view_places():
 @app.route('/logout')
 def logout():
     session.pop("username", None)
-    flash("you have been logged out")
     return redirect('/')
 
 if __name__ == "__main__":
