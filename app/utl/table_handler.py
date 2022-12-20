@@ -148,7 +148,7 @@ def get_hotels(arprt):
 
 	db.commit()
 	db.close()
-
+"""
 # Testing
 setup()
 
@@ -177,3 +177,4 @@ add_bsns("Joe's Pizza", "Near Gabriel's House")
 rate_bsns("Somewhere Over the Rainbow", 1)
 rate_bsns("Somewhere Over the Rainbow", -1)
 rate_bsns("Somewhere Over the Rainbow", -1)
+"""
