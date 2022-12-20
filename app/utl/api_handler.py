@@ -49,7 +49,11 @@ def airport_api(airport_code):
 #     "distance": 1.4,
 #     "latitude": 33.95998,
 #     "longitude": -118.41685
-#   }
+#     "tags": [
+#         "Mexican",
+#         "Tex-Mex"
+#     ]
+# }
 
 # returns a string if the key "businesses" is not found in the API response
 # "An error occured. Try checking your API key."
@@ -107,7 +111,15 @@ def yelp_api(location):
         main_info["distance"] = round(all_info["distance"] * 0.000621371, 1)
         main_info["latitude"] = all_info["coordinates"]["latitude"]
         main_info["longitude"] = all_info["coordinates"]["longitude"]
-        # where do i get a description from?
+        # getting tags
+        categories = all_info["categories"] # array of dictionaries
+        # print(categories)
+        num_categories = len(categories)
+        # print(num_categories)
+        tags = []
+        for i in range(num_categories):
+            tags.append(categories[i]["title"])
+        main_info["tags"] = tags
     return output   
 
 
@@ -213,11 +225,13 @@ def map_api(coordinates):
 # print("should be [33.94159, -118.40853]")
 # print(airport_api("LAX"))
 
-# print("==================== yelp_api test ====================")
+print("==================== yelp_api test ====================")
 # coords = airport_api("LAX")
-# yelp_results = yelp_api(coords)
-# # print(yelp_results)
-# print(json.dumps(yelp_results, indent=2))
+coords = [33.94159, -118.40853] # LAX
+# coords = [53.333610, -2.849722] # Liverpool Airport
+yelp_results = yelp_api(coords)
+# print(yelp_results)
+print(json.dumps(yelp_results, indent=2))
 
 # print("==================== booking_api test ====================")
 # coords = airport_api("LAX")
