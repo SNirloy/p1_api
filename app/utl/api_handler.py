@@ -130,11 +130,12 @@ def yelp_api(location):
 # returns array of up to 5 (can try diff numbers later) hotels, array has 5 hotels majority of the time, not sure what search radius is
 # each element in the array is a dictionary for one business containing the following info
 # {
-# "hotel_name": "Super 8 by Wyndham Oneida Verona",
-# "address": "215 Genesse Street",
-# "min_total_price": 152.31,
-# "latitude": 43.0788,
-# "longitude": -75.653398
+# "hotel_name": "The Metric - Los Angeles Downtown",
+# "address": "285 Lucas Avenue",
+# "min_total_price": 243,
+# "latitude": 34.058728,
+# "longitude": -118.261664,
+# "distance": 18.8
 # }
 
 # returns a string if the key "result" is not found in the API response
@@ -164,7 +165,7 @@ def booking_api(input):
     "checkout_date":end,\
     "room_number":"1",\
     "adults_number":"2",\
-    "units":"metric"}
+    "units":"imperial"}
 
     headers = {
         "X-RapidAPI-Key": key,
@@ -206,6 +207,7 @@ def booking_api(input):
         temp["min_total_price"] = int(hotel["min_total_price"])
         temp["latitude"] = hotel["latitude"]
         temp["longitude"] = hotel["longitude"]
+        temp["distance"] = round(float(hotel["distance"]), 1)
         output.append(temp)
     return output  
 
@@ -221,17 +223,17 @@ def map_api(coordinates):
     </div>
 """
 
-# print("==================== airport_api test ====================")
-# print("should be [33.94159, -118.40853]")
-# print(airport_api("LAX"))
+print("==================== airport_api test ====================")
+print("should be [33.94159, -118.40853]")
+print(airport_api("LAX"))
 
-# print("==================== yelp_api test ====================")
-# # coords = airport_api("LAX")
-# coords = [33.94159, -118.40853] # LAX
-# # coords = [53.333610, -2.849722] # Liverpool Airport
-# yelp_results = yelp_api(coords)
-# # print(yelp_results)
-# print(json.dumps(yelp_results, indent=2))
+print("==================== yelp_api test ====================")
+# coords = airport_api("LAX")
+coords = [33.94159, -118.40853] # LAX
+# coords = [53.333610, -2.849722] # Liverpool Airport
+yelp_results = yelp_api(coords)
+# print(yelp_results)
+print(json.dumps(yelp_results, indent=2))
 
 print("==================== booking_api test ====================")
 # coords = airport_api("LAX")
@@ -242,28 +244,28 @@ data.append("2022-12-31") # end date
 results = booking_api(data)
 print(json.dumps(results, indent=2))
 
-# print("South Pole Test:")
-# data = [90, 45, "2022-12-30", "2022-12-31"]
-# results = booking_api(data)
-# print(results)
+print("South Pole Test:")
+data = [90, 45, "2022-12-30", "2022-12-31"]
+results = booking_api(data)
+print(results)
 
-# print("Small Town Test (Sherrill, NY):")
-# print("Trying to make sure booking_api() works when there's < 5 results from the API but even this small town has 15 results")
-# data = [43.0737, -75.5982, "2022-12-30", "2022-12-31"]
-# results = booking_api(data)
-# print(json.dumps(results, indent=2))
+print("Small Town Test (Sherrill, NY):")
+print("Trying to make sure booking_api() works when there's < 5 results from the API but even this small town has 15 results")
+data = [43.0737, -75.5982, "2022-12-30", "2022-12-31"]
+results = booking_api(data)
+print(json.dumps(results, indent=2))
 
-# print("Dates Too Far Apart Test")
-# data = [90, 45, "2023-01-01", "2023-12-31"]
-# results = booking_api(data)
-# print(results)
+print("Dates Too Far Apart Test")
+data = [90, 45, "2023-01-01", "2023-12-31"]
+results = booking_api(data)
+print(results)
 
-# print("Dates Already Passed Test")
-# data = [90, 45, "2021-01-01", "2021-12-31"]
-# results = booking_api(data)
-# print(results)
+print("Dates Already Passed Test")
+data = [90, 45, "2021-01-01", "2021-12-31"]
+results = booking_api(data)
+print(results)
 
-# print("Checkout Before Checkin Test")
-# data = [90, 45, "2022-12-31", "2022-12-30"]
-# results = booking_api(data)
-# print(results)
+print("Checkout Before Checkin Test")
+data = [90, 45, "2022-12-31", "2022-12-30"]
+results = booking_api(data)
+print(results)

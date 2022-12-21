@@ -189,3 +189,13 @@ cleaned up code, added functionality for handling bad API keys
 and other errors, added more clear comments above each method,
 edited what methods returned
 ==============================================================
+
+emilyO -- 2022-12-20 13:20
+--------------------------------------------------------------
+made yelp_api() in api_handler.py return tags
+==============================================================
+
+emilyO -- 2022-12-21 01:20
+--------------------------------------------------------------
+made booking_api() in api_handler.py return distance
+==============================================================
