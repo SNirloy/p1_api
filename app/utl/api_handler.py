@@ -223,49 +223,49 @@ def map_api(coordinates):
     </div>
 """
 
-print("==================== airport_api test ====================")
-print("should be [33.94159, -118.40853]")
-print(airport_api("LAX"))
+# print("==================== airport_api test ====================")
+# print("should be [33.94159, -118.40853]")
+# print(airport_api("LAX"))
 
-print("==================== yelp_api test ====================")
-# coords = airport_api("LAX")
-coords = [33.94159, -118.40853] # LAX
-# coords = [53.333610, -2.849722] # Liverpool Airport
-yelp_results = yelp_api(coords)
-# print(yelp_results)
-print(json.dumps(yelp_results, indent=2))
+# print("==================== yelp_api test ====================")
+# # coords = airport_api("LAX")
+# coords = [33.94159, -118.40853] # LAX
+# # coords = [53.333610, -2.849722] # Liverpool Airport
+# yelp_results = yelp_api(coords)
+# # print(yelp_results)
+# print(json.dumps(yelp_results, indent=2))
 
-print("==================== booking_api test ====================")
-# coords = airport_api("LAX")
-# data = coords
-data = [33.94159, -118.40853]
-data.append("2022-12-30") # start date
-data.append("2022-12-31") # end date
-results = booking_api(data)
-print(json.dumps(results, indent=2))
+# print("==================== booking_api test ====================")
+# # coords = airport_api("LAX")
+# # data = coords
+# data = [33.94159, -118.40853]
+# data.append("2022-12-30") # start date
+# data.append("2022-12-31") # end date
+# results = booking_api(data)
+# print(json.dumps(results, indent=2))
 
-print("South Pole Test:")
-data = [90, 45, "2022-12-30", "2022-12-31"]
-results = booking_api(data)
-print(results)
+# print("South Pole Test:")
+# data = [90, 45, "2022-12-30", "2022-12-31"]
+# results = booking_api(data)
+# print(results)
 
-print("Small Town Test (Sherrill, NY):")
-print("Trying to make sure booking_api() works when there's < 5 results from the API but even this small town has 15 results")
-data = [43.0737, -75.5982, "2022-12-30", "2022-12-31"]
-results = booking_api(data)
-print(json.dumps(results, indent=2))
+# print("Small Town Test (Sherrill, NY):")
+# print("Trying to make sure booking_api() works when there's < 5 results from the API but even this small town has 15 results")
+# data = [43.0737, -75.5982, "2022-12-30", "2022-12-31"]
+# results = booking_api(data)
+# print(json.dumps(results, indent=2))
 
-print("Dates Too Far Apart Test")
-data = [90, 45, "2023-01-01", "2023-12-31"]
-results = booking_api(data)
-print(results)
+# print("Dates Too Far Apart Test")
+# data = [90, 45, "2023-01-01", "2023-12-31"]
+# results = booking_api(data)
+# print(results)
 
-print("Dates Already Passed Test")
-data = [90, 45, "2021-01-01", "2021-12-31"]
-results = booking_api(data)
-print(results)
+# print("Dates Already Passed Test")
+# data = [90, 45, "2021-01-01", "2021-12-31"]
+# results = booking_api(data)
+# print(results)
 
-print("Checkout Before Checkin Test")
-data = [90, 45, "2022-12-31", "2022-12-30"]
-results = booking_api(data)
-print(results)
+# print("Checkout Before Checkin Test")
+# data = [90, 45, "2022-12-31", "2022-12-30"]
+# results = booking_api(data)
+# print(results)
