@@ -67,7 +67,18 @@ def view_places():
     print('='*50 + " YELP " + "="*50)
     print(yelp_results)
 
-    return render_template('view_places.html', yelp_results=yelp_results)
+    hotel_results = api_handler.booking_api(coords + [request.args['date1'], request.args['date2']])
+    print('='*50 + " HOTEL " + "="*50)
+    print(hotel_results)
+
+    lat, lon = coords[0], coords[1]
+    left = lon - 0.1
+    right = lon + 0.1
+    down = lat - 0.1
+    up = lat + 0.1
+    bbox = f"{left}%2C{down}%2C{right}%2C{up}"
+
+    return render_template('view_places.html', yelp_results=yelp_results, hotel_results=hotel_results, bbox=bbox)
 
 @app.route('/logout')
 def logout():
