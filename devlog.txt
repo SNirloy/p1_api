@@ -199,3 +199,8 @@ emilyO -- 2022-12-21 01:20
 --------------------------------------------------------------
 made booking_api() in api_handler.py return distance
 ==============================================================
+
+thomasZ -- 2022-12-21 23:11
+--------------------------------------------------------------
+Added an error message for invalid login and added a feature 
+to force users to login first before using the website
