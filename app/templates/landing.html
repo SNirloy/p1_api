@@ -18,10 +18,9 @@
   <br>
   <h3 class="title" style="font-weight: 800; color: grey; font-family: 'Verdana';">
       Find things to do at
-      <u style="text-decoration-style: wavy; text-decoration-color: rgb(152, 185, 198)">
-        <span class="wavy animate" style="font-family: 'Verdana';"></span><span class="typed-cursor" aria-hidden="true"></span>
-      </u>
+      <span class="highlight-container"><span class="wavy animate highlight" style="font-family: 'Verdana';"></span></span><span class="typed-cursor" aria-hidden="true"></span>
   </h3>
+
   <br>
   <p id="hello" style="width: 50vw; font-size: 14px;"><b style="color: rgb(54, 131, 226);">Layover Calculator</b> makes it easy to find things to do during plane layovers! Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
   <br>
@@ -62,6 +61,8 @@
         <input type="time" id="time2" name="time2" class="form-control" required>
       </div>
     </div>
+    <input type="hidden" name="restaurants" value="on" />
+    <input type="hidden" name="hotels" value="on" />
     <div class="row" style="width: 50vw;">
       <div class="col"></div>
       <div class="col"></div>
@@ -287,6 +288,35 @@
   .autocomplete-active {
     background-color: DodgerBlue !important;
     color: #ffffff;
+  }
+
+  .highlight-container, .highlight {
+    position: relative;
+  }
+
+  .highlight-container {
+    display: inline-block;
+  }
+  .highlight-container:before {
+    content: " ";
+    display: block;
+    height: 110%;
+    width: 100%;
+    margin-left: -3px;
+    margin-right: -3px;
+    position: absolute;
+    background: #ffd500;
+    top: -1px;
+    left: -1px;
+    border-radius: 20% 25% 20% 24%;
+    padding: 1
+  }
+
+  .container {
+    line-height: 1.4;
+    text-align: center;
+    padding: 44px;
+    color: #333;
   }
 </style>
 {% endblock %}

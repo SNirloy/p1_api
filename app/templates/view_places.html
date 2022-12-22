@@ -92,10 +92,20 @@
           <li class="list-group-item">
             <table>
               <tr>
+                <td style="width: 7%">
+                  <a href="/rate?{{ place[0]['latitude'] }} {{ place[0]['longitude'] }} 1=Submit&airport={{ request.args['airport'] }}&date1={{ request.args['date1'] }}&date2={{ request.args['date2'] }}&time1={{ request.args['time1'] }}&time2={{ request.args['time2'] }}&restaurants={{ request.args['restaurant'] }}&hotels={{ request.args['hotels'] }}" style="font-size: 20px;">
+                    <i class="fa-solid fa-arrow-up"></i>
+                  </a>
+                  <br>
+                  <a href="/rate?{{ place[0]['latitude'] }} {{ place[0]['longitude'] }} -1=Submit&airport={{ request.args['airport'] }}&date1={{ request.args['date1'] }}&date2={{ request.args['date2'] }}&time1={{ request.args['time1'] }}&time2={{ request.args['time2'] }}&restaurants={{ request.args['restaurant'] }}&hotels={{ request.args['hotels'] }}" style="font-size: 20px;">
+                    <i class="fa-solid fa-arrow-down"></i>
+                  </a>
+                </td>
                 <td style="width: 100%">
                   <h4><i><i class="fa-solid fa-cutlery"></i> {{ place[0]['name'] }}</i><span style="font-size: 12px;"> <a href="{{ place[0]['url'] }}">Link</a></span></h4>
                   <p>{{ place[0]['display_address'] }}<br>
-	          R: {{ place[1] }} <form action="/rate"><input type="submit" name="{{ place[0]['latitude'] }} {{ place[0]['longitude'] }} 1" class="Upvote"><input type="submit" name="{{ place[0]['latitude'] }} {{ place[0]['longitude'] }} -1" class="downvote"> </form></p>
+	                <p><i>Rating: {{ place[1] }}</i></p>
+
                   {% for tag in place[0]['tags'] %}
                   <span class="badge badge-secondary">{{ tag }}</span>
                   {% endfor %}

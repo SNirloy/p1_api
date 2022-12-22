@@ -99,14 +99,16 @@ def view_places():
 
 @app.route('/rate', methods = ["GET", "POST"])
 def rating():
-    for thing in request.args: 
-        resp = thing.split(" ")
-        change = 1
-        if(resp[2] == "-1"):
-            change = -1
-        coors = str(resp[0]) + ", " + str(resp[1])
-        table_handler.rate_bsns(coors, change)
-    return redirect("/view_places")
+    thing = [i for i in request.args if i not in ['airport', 'date1', 'date2', 'time1', 'time2''restaurants', 'hotels']][0]
+
+    resp = thing.split(" ")
+    change = 1
+    if(resp[2] == "-1"):
+        change = -1
+    coors = str(resp[0]) + ", " + str(resp[1])
+    table_handler.rate_bsns(coors, change)
+
+    return redirect(f"/view_places?airport={request.args['airport']}&date1={request.args['date1']}&date2={request.args['date2']}&time1={request.args['time1']}&time2={request.args['time2']}&restaurants=on&hotels=on")
 
 @app.route('/logout')
 def logout():
