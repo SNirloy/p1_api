@@ -36,7 +36,7 @@ def registration():
         flash("That username is already taken", "danger")
         return render_template('register.html')
     else:
-        return render_template('login.html', message = "Account created!")
+        return render_template('login.html')
 
 @app.route("/login", methods = ['GET', 'POST'])
 def loginpage():
@@ -49,36 +49,42 @@ def login():
             session['username'] = request.form['username']
             return redirect('/')
         else:
-            return render_template('login.html' , message = "Invalid username/password")
+            flash("Invalid username/password", "danger")
+            return render_template('login.html')
     else: 
-        return render_template('login.html', message = "invalid username/password")
+        flash("Please enter your username/password", "danger")
+        return render_template('login.html')
 
 @app.route("/view_places")
 def view_places():
-    airport_name = request.args['airport']
-    airport_code = airport_name[-4:-1]
-    print('Airport: ' + airport_code)
-    coords = api_handler.airport_api(airport_code) 
-    print('='*50 + " AIRPORT " + "="*50)
-    print(coords)
+    if not 'username' in session:
+        flash("Please log in or register first", "danger")
+        return redirect('/login')
+    else: 
+        airport_name = request.args['airport']
+        airport_code = airport_name[-4:-1]
+        print('Airport: ' + airport_code)
+        coords = api_handler.airport_api(airport_code) 
+        print('='*50 + " AIRPORT " + "="*50)
+        print(coords)
 
 
-    yelp_results = api_handler.yelp_api(coords)
-    print('='*50 + " YELP " + "="*50)
-    print(yelp_results)
+        yelp_results = api_handler.yelp_api(coords)
+        print('='*50 + " YELP " + "="*50)
+        print(yelp_results)
 
-    hotel_results = api_handler.booking_api(coords + [request.args['date1'], request.args['date2']])
-    print('='*50 + " HOTEL " + "="*50)
-    print(hotel_results)
+        hotel_results = api_handler.booking_api(coords + [request.args['date1'], request.args['date2']])
+        print('='*50 + " HOTEL " + "="*50)
+        print(hotel_results)
 
-    lat, lon = coords[0], coords[1]
-    left = lon - 0.1
-    right = lon + 0.1
-    down = lat - 0.1
-    up = lat + 0.1
-    bbox = f"{left}%2C{down}%2C{right}%2C{up}"
+        lat, lon = coords[0], coords[1]
+        left = lon - 0.1
+        right = lon + 0.1
+        down = lat - 0.1
+        up = lat + 0.1
+        bbox = f"{left}%2C{down}%2C{right}%2C{up}"
 
-    return render_template('view_places.html', yelp_results=yelp_results, hotel_results=hotel_results, bbox=bbox)
+        return render_template('view_places.html', yelp_results=yelp_results, hotel_results=hotel_results, bbox=bbox)
 
 @app.route('/logout')
 def logout():
