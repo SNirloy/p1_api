@@ -83,7 +83,7 @@ def add_bsns(bsns_name, bsns_place):
 	response = c.fetchone()
 	if (response == None):
 		bsns_tuple = (bsns_name, bsns_place)
-		c.execute("insert into location values (?, ?, 0);", bsns_tuple)
+		c.execute("insert into bsns_rate values (?, ?, 0);", bsns_tuple)
 
 	db.commit()
 	db.close()	
