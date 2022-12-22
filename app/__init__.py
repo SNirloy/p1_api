@@ -36,6 +36,7 @@ def registration():
         flash("That username is already taken", "danger")
         return render_template('register.html')
     else:
+        flash("Successfully signed up!", "success")
         return render_template('login.html')
 
 @app.route("/login", methods = ['GET', 'POST'])
