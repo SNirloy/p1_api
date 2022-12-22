@@ -83,7 +83,7 @@ def add_bsns(bsns_name, bsns_place):
 	response = c.fetchone()
 	if (response == None):
 		bsns_tuple = (bsns_name, bsns_place)
-		c.execute("insert into bsns_rate values (?, ?, 0);", bsns_tuple)
+		c.execute("insert into location values (?, ?, 0);", bsns_tuple)
 
 	db.commit()
 	db.close()	
@@ -113,7 +113,7 @@ def get_rate(bsns_place):
 	c = db.cursor()
 
 	place_tuple = (bsns_place, )
-	c.execute("select net_rating from bsns_rate where bsns_place = ?;", place_tuple)
+	c.execute("select net_rating from bsns_rate where location = ?;", place_tuple)
 	response = c.fetchone()
 	if (response != None):
 		return int(response[0])

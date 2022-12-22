@@ -93,22 +93,23 @@
             <table>
               <tr>
                 <td style="width: 100%">
-                  <h4><i><i class="fa-solid fa-cutlery"></i> {{ place['name'] }}</i><span style="font-size: 12px;"> <a href="{{ place['url'] }}">Link</a></span></h4>
-                  <p>{{ place['display_address'] }}</p>
-                  {% for tag in place['tags'] %}
+                  <h4><i><i class="fa-solid fa-cutlery"></i> {{ place[0]['name'] }}</i><span style="font-size: 12px;"> <a href="{{ place[0]['url'] }}">Link</a></span></h4>
+                  <p>{{ place[0]['display_address'] }}<br>
+	          R: {{ place[1] }} <form action="/rate"><input type="submit" name="{{ place[0]['latitude'] }} {{ place[0]['longitude'] }} 1" class="Upvote"><input type="submit" name="{{ place[0]['latitude'] }} {{ place[0]['longitude'] }} -1" class="downvote"> </form></p>
+                  {% for tag in place[0]['tags'] %}
                   <span class="badge badge-secondary">{{ tag }}</span>
                   {% endfor %}
                 </td>
                 <td style="width: 100%">
                   <h5 style="text-align: right; color:
-                  {% if place['price'] == '$' %}green
-                  {% elif place['price'] == '$$' %}rgb(247, 195, 68)
-                  {% elif place['price'] == '$$$' %}orange
-                  {% elif place['price'] == '$$$$' %}red
+                  {% if place[0]['price'] == '$' %}green
+                  {% elif place[0]['price'] == '$$' %}rgb(247, 195, 68)
+                  {% elif place[0]['price'] == '$$$' %}orange
+                  {% elif place[0]['price'] == '$$$$' %}red
                   {% endif %}
 
-                  ;">{{ place['price'] }}</h5>
-                  <p style="text-align: right;">{{ place['distance'] }} mi <a href="https://www.google.com/maps/dir//{{ place['latitude'] }},{{ place['longitude'] }}/"><br>Directions</a></p>
+                  ;">{{ place[0]['price'] }}</h5>
+                  <p style="text-align: right;">{{ place[0]['distance'] }} mi <a href="https://www.google.com/maps/dir//{{ place[0]['latitude'] }},{{ place[0]['longitude'] }}/"><br>Directions</a></p>
 
                 </td>
               </tr>

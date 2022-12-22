@@ -57,6 +57,7 @@ def login():
 
 @app.route("/view_places")
 def view_places():
+    print(session)
     if not 'username' in session:
         flash("Please log in or register first", "danger")
         return redirect('/login')
@@ -71,7 +72,17 @@ def view_places():
 
         yelp_results = api_handler.yelp_api(coords)
         print('='*50 + " YELP " + "="*50)
-        print(yelp_results)
+        ratings = []
+        for rest in yelp_results:
+            restcoor = str(rest["latitude"]) + ", " + str(rest["longitude"])
+            print(restcoor)
+            table_handler.add_bsns(rest["name"], restcoor)
+            ratings.append(table_handler.get_rate(restcoor))
+        # print(yelp_results)
+
+        restaurs = []
+        for i in range(len(yelp_results)):
+            restaurs.append((yelp_results[i], ratings[i]))
 
         hotel_results = api_handler.booking_api(coords + [request.args['date1'], request.args['date2']])
         print('='*50 + " HOTEL " + "="*50)
@@ -84,7 +95,18 @@ def view_places():
         up = lat + 0.1
         bbox = f"{left}%2C{down}%2C{right}%2C{up}"
 
-        return render_template('view_places.html', yelp_results=yelp_results, hotel_results=hotel_results, bbox=bbox)
+        return render_template('view_places.html', yelp_results=restaurs, hotel_results=hotel_results, bbox=bbox, scores = ratings, zip = zip)
+
+@app.route('/rate', methods = ["GET", "POST"])
+def rating():
+    for thing in request.args: 
+        resp = thing.split(" ")
+        change = 1
+        if(resp[2] == "-1"):
+            change = -1
+        coors = str(resp[0]) + ", " + str(resp[1])
+        table_handler.rate_bsns(coors, change)
+    return redirect("/view_places")
 
 @app.route('/logout')
 def logout():
