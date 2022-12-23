@@ -181,6 +181,12 @@ finished up api_handler.py and committed changes from today and
 2022-12-18
 ==============================================================
 
+gabrielT -- 2022-12-19 23:00
+--------------------------------------------------------------
+connected view_places to api so that the website lists nearby
+restaurants
+==============================================================
+
 emilyO -- 2022-12-20 00:30
 --------------------------------------------------------------
 haha i was not done with api_handler.py
@@ -193,6 +199,12 @@ edited what methods returned
 emilyO -- 2022-12-20 13:20
 --------------------------------------------------------------
 made yelp_api() in api_handler.py return tags
+==============================================================
+
+gabrielT -- 2022-12-20 13:20
+--------------------------------------------------------------
+fixed checkboxes so that the search adjusts by whether they
+are checked or not
 ==============================================================
 
 emilyO -- 2022-12-21 01:20
